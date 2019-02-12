@@ -1,8 +1,8 @@
 package com.epam.training.util;
 
 public class AppConstant {
-    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
-    public static final String RECOURSES_DIRECTORY = "src//main//resources//";
+    public static final String DIRECTORY = "C://Users//k_mak//IdeaProjects//TrainingProject//";
+    public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
     //Name of pages for redirect
     public static final String COURSES =             "listOfCourses";
@@ -26,8 +26,27 @@ public class AppConstant {
     public static final String PASSWORD =             "password";
     public static final String LOGIN_ERROR = "login_error";
 
+    //register
+    public static final String NAME = "name";
+    public static final String PASSWORD_REPEAT = "password2";
+    public static final String SURNAME = "surname";
+    public static final String EMAIL = "email";
+    public static final String LOGIN_VAL_ERROR = "login_val_error";
+
     //Session
     public static final String ATT_USER_ID = "userId";
     public static final String ATT_ROLE =        "role";
     public static final String ATT_ROLE_ID =     "role_id";
+
+    //
+    public static final String STUDENT_ROLE = "student";
+
+    //validation
+    public static final String PASSWORD_VALIDATION = ".{6,}";
+    public static final String NAME_VALIDATION = "\\p{L}{1,45}";
+    public static final String SURNAME_VALIDATION = "\\p{L}{1,45}";
+    public static final String EMAIL_VALIDATION = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
+    public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
+    public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
+    public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
 }

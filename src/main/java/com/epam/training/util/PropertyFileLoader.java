@@ -11,7 +11,7 @@ public class PropertyFileLoader {
 
     public static Properties load(final String filename) {
         Properties properties = new Properties();
-        try (FileInputStream fileInputStream = new FileInputStream(DIRECTORY + RECOURSES_DIRECTORY + filename)) {
+        try (FileInputStream fileInputStream = new FileInputStream(DIRECTORY + RESOURCES_DIRECTORY + filename)) {
             properties.load(fileInputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

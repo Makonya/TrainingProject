@@ -11,6 +11,7 @@ import org.apache.log4j.*;
 public class UserDao extends AbstractDao<User> {
     private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM USER";
     private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM USER WHERE ID=?";
+    private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT * FROM USER WHERE ID=?";
     private static final String SQL_SELECT_USER_BY_LOGIN_PASSWORD = "SELECT * FROM USER WHERE LOGIN=? AND PASSWORD=?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM USER WHERE ID=?";
     private static final String SQL_INSERT_USER = "INSERT INTO USER(ID_USER,LOGIN,PASSWORD,NAME,SURNAME,EMAIL,ID_ROLE) VALUES(ID_USER, ?,?,?,?,?,?)";
@@ -50,6 +51,24 @@ public class UserDao extends AbstractDao<User> {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
         return user;
+    }
+
+    public boolean findByLogin(String login) {
+        boolean exist = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN)) {
+            preparedStatement.setString(1, login);
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    exist = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return exist;
     }
 
     @Override
