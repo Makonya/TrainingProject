@@ -12,8 +12,15 @@ public class ActionFactory {
     }
 
     private void init(){
-        actionsMap.put("POST/login", new LoginAction());
-        actionsMap.put("GET/welcome", new WelcomeAction());
+
+        actionsMap.put("GET/welcome", new ShowPageAction("welcome"));
+        actionsMap.put("GET/authorization", new ShowPageAction("authorization"));
+        actionsMap.put("GET/registration", new ShowPageAction("registration"));
+        actionsMap.put("GET/set-language", new ChangeLanguageAction());
+        actionsMap.put("GET/listOfCourses", new ShowPageAction("listOfCourses"));
+
+        actionsMap.put("POST/authorization", new LoginAction());
+        actionsMap.put("POST/registration", new RegisterAction());
     }
 
     public Action getAction(HttpServletRequest request){

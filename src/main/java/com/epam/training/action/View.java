@@ -4,9 +4,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.apache.log4j.*;
+
+import static com.epam.training.util.AppConstant.*;
 
 public class View {
-    private static final Logger log = LoggerFactory.getLogger(View.class);
+    private static final Logger logger = Logger.getLogger(View.class);
 
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -25,7 +28,7 @@ public class View {
                 request.getRequestDispatcher(path).forward(request, response);
             }
         } catch (ServletException | IOException e) {
-            log.error("Can't work redirect dispatcher" ,e);
+            logger.error("Can't work redirect dispatcher" ,e);
         }
     }
 }

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 29.03.2017
-  Time: 23:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -26,13 +19,10 @@
       <p class="display-3 text-center">${MFString}</p>
       <p class="display-4 text-center">${MSString}</p>
       <p class="text-center">
-        <button type="button" class="btn btn-primary btn-lg">${MAuthorization}</button>
-        <button type="button" class="btn btn-primary btn-lg">${MRegistration}</button>
+        <a href="/kz/authorization" class="btn btn-primary">${MAuthorization}</a>
+        <a href="/kz/registration" class="btn btn-primary">${MRegistration}</a>
       </p>
     </div>
   </div>
-  </div>
 
 </my:designPattern>
-
-</div>

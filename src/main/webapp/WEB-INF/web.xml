@@ -45,4 +45,17 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/kz/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>com.epam.training.filter.AccessFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/kz/*</url-pattern>
+    </filter-mapping>
 </web-app>

@@ -34,12 +34,18 @@ public class ConnectionPool {
     public static ConnectionPool init() {
         ConnectionPool instance = null;
         Properties properties = PropertyFileLoader.load("database.properties");
+        String driver = properties.getProperty("db.driverClassName");
         String url = properties.getProperty("db.url");
         String user = properties.getProperty("db.user");
         String password = properties.getProperty("db.password");
         String poolSizeStr = properties.getProperty("db.poolsize");
         int poolSize = (poolSizeStr != null) ? Integer.parseInt(poolSizeStr) : DEFAULT_POOL_SIZE;
         try {
+            try {
+                Class.forName(driver);
+            } catch (ClassNotFoundException e) {
+                logger.error("Can't find driver for JDBC MySql", e);
+            }
             instance = new ConnectionPool(url, user, password, poolSize);
         } catch (SQLException e) {
             e.printStackTrace();
