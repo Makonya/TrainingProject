@@ -16,6 +16,7 @@ public class ChangeLanguageAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String language = request.getParameter(LANG);
+        System.out.println(language);
         Config.set(request.getSession(), Config.FMT_LOCALE, new Locale(language));
         Cookie cookie = new Cookie(LANG, language);
         cookie.setMaxAge(HOUR * MINUTE * SEC);

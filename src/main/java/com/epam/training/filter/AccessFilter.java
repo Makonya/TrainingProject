@@ -52,7 +52,7 @@ public class AccessFilter implements Filter {
             }
         } else if (req.getSession().getAttribute(ATT_ROLE).equals(student)) {
             if (!studentAccess.contains(path)) {
-                logger.warn("Can't get permission(admin) for path " + path);
+                logger.warn("Can't get permission(student) for path " + path);
                 resp.sendRedirect(COURSES);
                 return;
             }

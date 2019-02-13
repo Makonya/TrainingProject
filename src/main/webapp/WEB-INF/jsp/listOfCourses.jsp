@@ -5,24 +5,27 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:bundle basename="i18n">
-    <fmt:message key="courses.categories" var="categories"/>
+    <fmt:message key="courses.categories" var="cCategories"/>
 </fmt:bundle>
 
 <my:designPattern role="guest">
 
     <div class="row py-5 align-items-center">
         <div class="col-md-3 col-12">
-            <h2>${categories}</h2>
+            <h2>${cCategories}</h2>
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">First item</a>
-                <a href="#" class="list-group-item list-group-item-action">Second item</a>
-                <a href="#" class="list-group-item list-group-item-action">Third item</a>
+                <c:forEach items="${categories}" var="category">
+                    <a href="/listOfCourses?categoryID=${category.id}" class="list-group-item list-group-item-action">${category.categoryName}</a>
+                </c:forEach>
             </div>
         </div>
         <div class="col-md-9 col-12 pl-5">
-            <a href="#" class="card-link"><h2>Name of course</h2></a>
-            <p class="text-info">DateFrom-DateTill</p>
-            <p class="text-secondary">Desciption</p>
+            <c:forEach items="${courses}" var="course">
+                <a href="/listOfCourses?categoryID=${category.id}" class="list-group-item list-group-item-action">${category.categoryName}</a>
+                <a href="#" class="card-link"><h2>${course.courseName}</h2></a>
+                <p class="text-info">${course.startDate}-${course.endDate}</p>
+                <p class="text-secondary">${course.description}</p>
+            </c:forEach>
         </div>
     </div>
 
