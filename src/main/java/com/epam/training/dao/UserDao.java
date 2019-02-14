@@ -10,7 +10,7 @@ import org.apache.log4j.*;
 
 public class UserDao extends AbstractDao<User> {
     private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM USER";
-    private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM USER WHERE ID=?";
+    private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM USER WHERE ID_USER=?";
     private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT * FROM USER WHERE LOGIN=?";
     private static final String SQL_SELECT_USER_BY_LOGIN_PASSWORD = "SELECT * FROM USER WHERE LOGIN=? AND PASSWORD=?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM USER WHERE ID=?";
@@ -130,8 +130,8 @@ public class UserDao extends AbstractDao<User> {
         boolean updated = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER)) {
-            setUserParameters(preparedStatement, entity).executeUpdate();
             preparedStatement.setInt(7,entity.getId());
+            setUserParameters(preparedStatement, entity).executeUpdate();
             updated = true;
         } catch (SQLException e) {
             e.printStackTrace();

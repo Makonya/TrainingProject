@@ -1,3 +1,4 @@
+<%@ tag import="static com.epam.training.util.AppConstant.ATT_ROLE" %>
 <%@ tag pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@attribute name="role" required="true" rtexprvalue="true" type="java.lang.String" %>
@@ -13,8 +14,10 @@
     <fmt:message key="main.profile" var="MProfile"/>
     <fmt:message key="main.footer.name" var="MName"/>
     <fmt:message key="main.footer.contact" var="MContact"/>
+    <fmt:message key="main.footer.logout" var="MLogout"/>
+    <fmt:message key="main.footer.edit" var="MEdit"/>
 </fmt:bundle>
-<html lang=ru>
+<html lang=en>
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,9 +32,6 @@
 <body>
 <div class="container-fluid">
     <div class="row my-header bg-light align-items-center py-2">
-        <div class="col-md-9 col-12">
-            <h1 class="display-4 text-uppercase text-center">${MHeader}</h1>
-        </div>
         <div class="col-md-2 col-6">
             <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -43,10 +43,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1 col-6">
-            <a href="#">
-                <h5>${MProfile}</h5>
-            </a>
+        <div class="col-md-8 col-12">
+            <h1 class="display-4 text-uppercase text-center">${MHeader}</h1>
+        </div>
+        <div class="col-md-2 col-6">
+            <c:if test="${not empty sessionScope.role}">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            ${MProfile}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/kz/profile">${MEdit}</a>
+                        <a class="dropdown-item" href="/kz/logout">${MLogout}</a>
+                    </div>
+                </div>
+            </c:if>
         </div>
     </div>
 

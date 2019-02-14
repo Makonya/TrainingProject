@@ -6,8 +6,6 @@ import com.epam.training.dao.LocaleDao;
 import com.epam.training.entity.Category;
 import com.epam.training.entity.Course;
 import com.epam.training.entity.Locale;
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,16 +23,18 @@ public class ListOfCoursesAction implements Action {
         CategoryDao categoryDao = new CategoryDao();
         List<Category> categories = categoryDao.findAllByIdLocale(localId);
         request.setAttribute(ATT_CATEGORIES, categories);
+
         CourseDao courseDao = new CourseDao();
         List<Course> courses;
-        String categoryId = request.getParameter(ATT_CATEGORY_ID);
-        if(categoryId != null){
+        String categoryId = getCookieValue(request, ATT_CATEGORY_ID);
+        if(categoryId != null && Integer.parseInt(categoryId) != 0){
             courses = courseDao.findByCategoryId(Integer.parseInt(categoryId));
         } else {
             courses = courseDao.findAll();
         }
-        request.setAttribute(ATT_CATEGORIES, categories);
-        return new ActionResult(LIST_OF_COUSES);
+        request.setAttribute(ATT_COURSES, courses);
+
+        return new ActionResult(LIST_OF_COURSES);
     }
 
     private int setLocale(HttpServletRequest request){

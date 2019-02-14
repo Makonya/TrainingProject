@@ -5,9 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
+import com.epam.training.dao.CourseDao;
 import com.epam.training.dao.RoleDao;
 import com.epam.training.dao.UserDao;
+import com.epam.training.entity.Course;
 import com.epam.training.entity.User;
 import com.epam.training.util.Encryption;
 import org.apache.log4j.*;

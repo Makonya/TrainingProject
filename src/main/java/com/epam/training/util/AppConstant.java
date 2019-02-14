@@ -2,14 +2,18 @@ package com.epam.training.util;
 
 public class AppConstant {
     public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
+//    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//src//main//webapp//images//profile-picture.png";
+    public static final String IMAGES_DIRECTORY = "src//main//webapp//images//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
-    //Name of pages for redirect
+    //Name of pages for redirect овечкина
     public static final String COURSES =             "listOfCourses";
     public static final String WELCOME =             "welcome";
     public static final String AUTHORIZATION =             "authorization";
     public static final String REGISTER =             "registration";
-    public static final String LIST_OF_COUSES =             "listOfCourses";
+    public static final String LIST_OF_COURSES =             "listOfCourses";
+    public static final String PROFILE =             "profile";
+    public static final String COURSE =             "course";
     //View
     public static final String PATH_TO_JSP = "/WEB-INF/jsp/";
     public static final String JSP_FORMAT = ".jsp";
@@ -62,4 +66,15 @@ public class AppConstant {
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
     public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
+
+    //profile
+    public static final String INPUT_LOGIN = "loginInput";
+    public static final String INPUT_NAME = "nameInput";
+    public static final String INPUT_SURNAME = "surnameInput";
+    public static final String INPUT_EMAIL = "emailInput";
+    public static final String EDIT_SUCCESS = "edit_success";
+
+    //course
+    public static final String ATT_COURSE_ID = "courseID";
+
 }

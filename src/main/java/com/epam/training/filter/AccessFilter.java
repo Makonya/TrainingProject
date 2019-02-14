@@ -80,16 +80,25 @@ public class AccessFilter implements Filter {
     private void initTeacher() {
         teacherAccess.add("/listOfCourses");
         teacherAccess.add("/set-language");
+        teacherAccess.add("/changeCategory");
+        teacherAccess.add("/logout");
+        teacherAccess.add("/profile");
     }
 
     private void initStudent() {
         studentAccess.add("/listOfCourses");
         studentAccess.add("/set-language");
+        studentAccess.add("/changeCategory");
+        studentAccess.add("/logout");
+        studentAccess.add("/profile");
     }
 
     private void initAdmin() {
         adminAccess.add("/listOfCourses");
         adminAccess.add("/set-language");
+        adminAccess.add("/changeCategory");
+        adminAccess.add("/logout");
+        adminAccess.add("/profile");
     }
 
     @Override
