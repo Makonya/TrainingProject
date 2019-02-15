@@ -76,5 +76,15 @@ public class AppConstant {
 
     //course
     public static final String ATT_COURSE_ID = "courseID";
+    public static final String ATT_COURSE_NAME = "courseName";
+    public static final String ATT_COURSE_DATE_START = "courseStartDate";
+    public static final String ATT_COURSE_DATE_END = "courseEndDate";
+    public static final String ATT_COURSE_TEACHER = "courseTeacher";
+    public static final String ATT_COURSE_DESCRIPTION = "courseDescription";
+    public static final String ATT_COURSE_ADD = "student_add_course";
+    public static final String ATT_COURSE_ADD_COMMENT = "student_add_comment";
+    public static final String ATT_COURSE_EDIT = "editCourse";
+    public static final String ATT_COURSE_MARK = "markStudents";
+    public static final String ATT_COURSE_FEEDBACK = "feedback";
 
 }

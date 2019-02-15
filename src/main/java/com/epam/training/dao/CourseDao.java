@@ -2,6 +2,7 @@ package com.epam.training.dao;
 
 import com.epam.training.connectionpool.ConnectionPool;
 import com.epam.training.entity.Course;
+import com.epam.training.entity.CourseUser;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -11,6 +12,7 @@ import java.util.List;
 public class CourseDao extends AbstractDao<Course> {
     private static Logger logger = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
+    private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
 
     @Override
@@ -30,8 +32,22 @@ public class CourseDao extends AbstractDao<Course> {
     }
 
     @Override
-    public Course findById(int id) {
-        return null;
+    public Course findById(int idCourse) {
+        Course course = null;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_ID)) {
+            preparedStatement.setInt(1, idCourse);
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    course = getCourseParameters(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return course;
     }
 
     @Override

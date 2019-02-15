@@ -11,7 +11,7 @@
 
 <my:designPattern role="guest">
 
-    <div class="row py-5 align-items-center">
+    <div class="row py-5">
         <div class="col-md-3 col-12">
             <h2>${cCategories}</h2>
             <div class="list-group">
@@ -24,7 +24,7 @@
         <div class="col-md-9 col-12 pl-5">
             <c:forEach items="${courses}" var="course">
                 <a href="/kz/course?courseID=${course.id}" class="card-link"><h2>${course.courseName}</h2></a>
-                <p class="text-info">${course.startDate}-${course.endDate}</p>
+                <p class="text-info">${course.startDate} - ${course.endDate}</p>
                 <p class="text-secondary">${course.description}</p>
             </c:forEach>
         </div>

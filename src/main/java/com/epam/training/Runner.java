@@ -6,6 +6,6 @@ import org.apache.log4j.*;
 
 public class Runner {
     public static void main(String[] args) {
-        System.out.println(Encryption.toEncrypt("admin"));
+        System.out.println(Encryption.toEncrypt("student123"));
     }
 }
