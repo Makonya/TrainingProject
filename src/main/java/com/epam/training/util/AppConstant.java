@@ -1,8 +1,7 @@
 package com.epam.training.util;
 
 public class AppConstant {
-    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
-//    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//src//main//webapp//images//profile-picture.png";
+    public static final String DIRECTORY = "C://Users//k_mak//IdeaProjects//TrainingProject//";
     public static final String IMAGES_DIRECTORY = "src//main//webapp//images//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
@@ -86,5 +85,7 @@ public class AppConstant {
     public static final String ATT_COURSE_EDIT = "editCourse";
     public static final String ATT_COURSE_MARK = "markStudents";
     public static final String ATT_COURSE_FEEDBACK = "feedback";
+    public static final String ATT_COURSE_COMMENT_TEXT = "myComment";
+    public static final String ATT_COURSE_ADD_COMMENT_SUCCESS = "add_comment_success";
 
 }

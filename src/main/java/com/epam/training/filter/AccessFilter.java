@@ -97,6 +97,7 @@ public class AccessFilter implements Filter {
         studentAccess.add("/course");
         studentAccess.add("/addCourse");
         studentAccess.add("/addComment");
+        studentAccess.add("/deleteCourse");
     }
 
     private void initAdmin() {

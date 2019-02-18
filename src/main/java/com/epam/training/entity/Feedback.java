@@ -2,7 +2,7 @@ package com.epam.training.entity;
 
 import java.util.Date;
 
-public class Feedback extends Entity {
+public class Feedback extends BaseEntity {
     private String feedbackText;
     private Date feedbackDate;
     private int idCourse;

@@ -1,16 +1,16 @@
 package com.epam.training.entity;
 
-public class Mark extends Entity {
-    private int mark;
+public class Mark extends BaseEntity {
+    private int total;
     private int idCourse;
     private int idUser;
 
-    public int getMark() {
-        return mark;
+    public int getTotal() {
+        return total;
     }
 
-    public void setMark(int mark) {
-        this.mark = mark;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getIdCourse() {

@@ -1,6 +1,6 @@
 package com.epam.training.entity;
 
-public abstract class Entity {
+public abstract class BaseEntity {
     private int id;
 
     public int getId() {
@@ -16,7 +16,7 @@ public abstract class Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Entity that = (Entity) o;
+        BaseEntity that = (BaseEntity) o;
 
         return id == that.id;
 

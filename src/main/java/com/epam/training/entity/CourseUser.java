@@ -1,6 +1,6 @@
 package com.epam.training.entity;
 
-public class CourseUser extends Entity {
+public class CourseUser extends BaseEntity {
     private int idCourse;
     private int idUser;
 

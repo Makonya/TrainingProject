@@ -1,4 +1,4 @@
-package com.epam.training.connectionpool;
+package com.epam.training.pool;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

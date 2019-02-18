@@ -1,6 +1,6 @@
 package com.epam.training.entity;
 
-public class User extends Entity {
+public class User extends BaseEntity {
     private String login;
     private String password;
     private String name;

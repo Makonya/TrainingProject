@@ -1,6 +1,6 @@
 package com.epam.training.entity;
 
-public class Category extends Entity {
+public class Category extends BaseEntity {
     private String categoryName;
     private int idLocale;
 

@@ -7,6 +7,7 @@
 <fmt:bundle basename="i18n">
     <fmt:message key="course.teacher" var="teacher"/>
     <fmt:message key="course.add.course" var="addCourse"/>
+    <fmt:message key="course.delete.course" var="deleteCourse"/>
     <fmt:message key="course.comment.title" var="commentTitle"/>
     <fmt:message key="course.add.comment" var="addComment"/>
     <fmt:message key="course.edit" var="courseEdit"/>
@@ -16,6 +17,7 @@
     <fmt:message key="course.description" var="description"/>
     <fmt:message key="main.back" var="MBack"/>
     <fmt:message key="course.comments" var="courseComments"/>
+    <fmt:message key="course.comment.add.success" var="comment_add_success"/>
 </fmt:bundle>
 
 <my:designPattern role="guest">
@@ -29,36 +31,54 @@
             <p class="text-info">${teacher}: ${courseTeacher}</p>
             <p class="text-secondary">${description}: ${courseDescription}</p>
             <c:if test="${sessionScope.role eq 'student'}">
-                <c:if test="${not empty student_add_course}">
-                    <a href="/kz/addCourse?idCourse=${courseId}" class="btn btn-primary">${addCourse}</a>
-                </c:if>
-                <c:if test="${not empty student_add_comment}">
-                    <div class="form-group">
-                        <label for="comment">${commentTitle}</label>
-                        <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
-                    </div>
-                    <a href="/kz/addComment?idCourse=${courseId}" class="btn btn-primary">${addComment}</a>
-                </c:if>
+                <c:choose>
+                    <c:when test="${not empty student_add_course}">
+                        <form action="/kz/addCourse" method="GET">
+                            <input type="hidden" value="${courseID}" name="courseID"/>
+                            <button type="submit" class="btn btn-primary">${addCourse}</button>
+                        </form>
+                    </c:when>
+                    <c:when test="${not empty student_add_comment}">
+                        <%--<c:if test="${not empty add_comment_success}">--%>
+                        <%--<p class="alert alert-success"--%>
+                        <%--style="height: 30px;padding: 5px">${comment_add_success}</p>--%>
+                        <%--</c:if>--%>
+                        <form action="/kz/addComment" method="GET">
+                            <div class="form-group">
+                                <label for="myComment">${commentTitle}</label>
+                                <input type="hidden" value="${courseID}" name="courseID"/>
+                                <textarea class="form-control" rows="5" id="myComment" name="myComment"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">${addComment}</button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form action="/kz/deleteCourse" method="GET">
+                            <input type="hidden" value="${courseID}" name="courseID"/>
+                            <button type="submit" class="btn btn-primary">${deleteCourse}</button>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
             </c:if>
             <c:if test="${sessionScope.role eq 'teacher'}">
                 <c:if test="${not empty editCourse}">
-                    <a href="/kz/editCourse?idCourse=${courseId}" class="btn btn-primary">${courseEdit}</a>
+                    <a href="/kz/editCourse?courseID=${courseID}" class="btn btn-primary">${courseEdit}</a>
                 </c:if>
                 <c:if test="${not empty markStudents}">
-                    <a href="/kz/addMarks?idCourse=${courseId}" class="btn btn-primary">${courseAddMarks}</a>
+                    <a href="/kz/addMarks?courseID=${courseID}" class="btn btn-primary">${courseAddMarks}</a>
                 </c:if>
             </c:if>
             <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a><br/><br/>
             <c:if test="${not empty feedback}">
                 <div class="jumbotron">
-                <h2>${courseComments}:</h2>
-                --------------------------------<br/>
-                <c:forEach items="${feedback}" var="comment">
-                    <p class="text-info">${comment.feedbackDate}</p>
-                    <p class="text-secondary">${comment.feedbackText}</p>
+                    <h2>${courseComments}:</h2>
                     --------------------------------<br/>
-                    </div>
-                </c:forEach>
+                    <c:forEach items="${feedback}" var="comment">
+                        <p class="text-info">${comment.feedbackDate}</p>
+                        <p class="text-secondary">${comment.feedbackText}</p>
+                        --------------------------------<br/>
+                    </c:forEach>
+                </div>
             </c:if>
         </div>
         <div class="col-md-1 col-12"></div>

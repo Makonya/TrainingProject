@@ -17,7 +17,7 @@
     <fmt:message key="main.footer.logout" var="MLogout"/>
     <fmt:message key="main.footer.edit" var="MEdit"/>
 </fmt:bundle>
-<html lang=en>
+<html lang=${sessionScope.lang}>
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -13,6 +13,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
         <url-pattern>/WEB-INF/images/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

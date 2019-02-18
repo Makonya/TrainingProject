@@ -1,6 +1,6 @@
 package com.epam.training.entity;
 
-public class Role extends Entity {
+public class Role extends BaseEntity {
     private String name;
 
     public String getName() {

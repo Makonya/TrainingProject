@@ -30,14 +30,14 @@ public class ShowCourseAction implements Action {
         CourseUserDao courseUserDao = new CourseUserDao();
 
         if(courseEndDate.before(currentDate)){
-            if(courseUserDao.findByUserId(userId)){
+            if(courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId))){
                 request.setAttribute(ATT_COURSE_ADD_COMMENT, true);
             }
             if(userId==course.getIdUser()){
                 request.setAttribute(ATT_COURSE_MARK , true);
             }
         } else {
-            if(!courseUserDao.findByUserId(userId)){
+            if(!courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId))){
                 request.setAttribute(ATT_COURSE_ADD , true);
             }
             if(userId==course.getIdUser()){

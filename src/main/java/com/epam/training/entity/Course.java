@@ -2,7 +2,7 @@ package com.epam.training.entity;
 
 import java.util.Date;
 
-public class Course extends Entity {
+public class Course extends BaseEntity {
     private String courseName;
     private String description;
     private Date startDate;

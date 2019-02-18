@@ -1,10 +1,10 @@
 package com.epam.training.dao;
 
-import com.epam.training.entity.Entity;
+import com.epam.training.entity.BaseEntity;
 
 import java.util.List;
 
-public abstract class AbstractDao<T extends Entity> {
+public abstract class AbstractDao<T extends BaseEntity> {
     public abstract List<T> findAll();
 
     public abstract T findById(int id);

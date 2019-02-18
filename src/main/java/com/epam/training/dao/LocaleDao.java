@@ -1,6 +1,6 @@
 package com.epam.training.dao;
 
-import com.epam.training.connectionpool.ConnectionPool;
+import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.Locale;
 import org.apache.log4j.Logger;
 

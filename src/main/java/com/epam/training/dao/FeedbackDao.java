@@ -1,20 +1,17 @@
 package com.epam.training.dao;
 
-import com.epam.training.connectionpool.ConnectionPool;
-import com.epam.training.entity.Entity;
+import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.Feedback;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeedbackDao extends AbstractDao<Feedback> {
     private static Logger logger = Logger.getLogger(FeedbackDao.class);
     private static final String SQL_SELECT_FEEDBACK_BY_COURSE_ID = "SELECT * FROM FEEDBACK WHERE ID_COURSE=?";
+    private static final String SQL_INSERT_FEEDBACK = "INSERT INTO FEEDBACK(INFO, FEEDBACK_DATE, ID_COURSE, ID_USER) VALUES(?,?,?,?)";
 
     @Override
     public List<Feedback> findAll() {
@@ -37,8 +34,19 @@ public class FeedbackDao extends AbstractDao<Feedback> {
     }
 
     @Override
-    public boolean insert(Feedback entity) {
-        return false;
+    public boolean insert(Feedback comment) {
+        boolean inserted = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK)) {
+            setFeedbackParameters(preparedStatement, comment).executeUpdate();
+            logger.info("Inserted new feedback comment");
+            inserted = true;
+        } catch (SQLException e) {
+            logger.error("New feedback comment wasn't inserted to db. " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return inserted;
     }
 
     @Override
@@ -55,13 +63,13 @@ public class FeedbackDao extends AbstractDao<Feedback> {
                 while (resultSet.next()) {
                     Feedback comment = getFeedbackParameters(resultSet);
                     feedback.add(comment);
-    }
-}
-        } catch (SQLException e) {
-                logger.error("Errors occurred while accessing the user table! " + e.getMessage());
-                } finally {
-                ConnectionPool.getConnectionPool().releaseConnection(connection);
                 }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
         return feedback;
     }
     private Feedback getFeedbackParameters(ResultSet resultSet) throws SQLException {
@@ -72,5 +80,13 @@ public class FeedbackDao extends AbstractDao<Feedback> {
         comment.setIdCourse(resultSet.getInt("ID_COURSE"));
         comment.setIdUser(resultSet.getInt("ID_USER"));
         return comment;
+    }
+
+    private PreparedStatement setFeedbackParameters(PreparedStatement preparedStatement, Feedback comment) throws SQLException {
+        preparedStatement.setString(1, comment.getFeedbackText());
+        preparedStatement.setDate(2, (Date) comment.getFeedbackDate());
+        preparedStatement.setInt(3, comment.getIdCourse());
+        preparedStatement.setInt(4, comment.getIdUser());
+        return preparedStatement;
     }
 }
