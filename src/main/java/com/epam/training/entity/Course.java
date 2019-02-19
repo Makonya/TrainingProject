@@ -9,6 +9,7 @@ public class Course extends BaseEntity {
     private Date endDate;
     private int idUser;
     private int idCategory;
+    private String teacherFullName;
 
     public String getCourseName() {
         return courseName;
@@ -56,5 +57,13 @@ public class Course extends BaseEntity {
 
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
+    }
+
+    public String getTeacherFullName() {
+        return teacherFullName;
+    }
+
+    public void setTeacherFullName(String teacherFullName) {
+        this.teacherFullName = teacherFullName;
     }
 }

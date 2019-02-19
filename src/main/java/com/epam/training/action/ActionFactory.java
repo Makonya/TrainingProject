@@ -27,6 +27,7 @@ public class ActionFactory {
         actionsMap.put("GET/addComment", new AddCommentAction());
         actionsMap.put("GET/addCourse", new AddCourseAction());
         actionsMap.put("GET/deleteCourse", new DeleteCourseAction());
+        actionsMap.put("GET/myCourses", new ShowMyCoursesAction());
 
         actionsMap.put("POST/authorization", new LoginAction());
         actionsMap.put("POST/registration", new RegisterAction());

@@ -33,7 +33,6 @@ public class ListOfCoursesAction implements Action {
             courses = courseDao.findAll();
         }
         request.setAttribute(ATT_COURSES, courses);
-
         return new ActionResult(LIST_OF_COURSES);
     }
 

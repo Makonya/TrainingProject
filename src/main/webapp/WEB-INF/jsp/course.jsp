@@ -20,7 +20,7 @@
     <fmt:message key="course.comment.add.success" var="comment_add_success"/>
 </fmt:bundle>
 
-<my:designPattern role="guest">
+<my:designPattern role="">
 
     <div class="row py-5 align-items-center">
         <div class="col-md-1 col-12"></div>
@@ -39,10 +39,6 @@
                         </form>
                     </c:when>
                     <c:when test="${not empty student_add_comment}">
-                        <%--<c:if test="${not empty add_comment_success}">--%>
-                        <%--<p class="alert alert-success"--%>
-                        <%--style="height: 30px;padding: 5px">${comment_add_success}</p>--%>
-                        <%--</c:if>--%>
                         <form action="/kz/addComment" method="GET">
                             <div class="form-group">
                                 <label for="myComment">${commentTitle}</label>
@@ -52,12 +48,12 @@
                             <button type="submit" class="btn btn-primary">${addComment}</button>
                         </form>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${not empty student_delete_course}">
                         <form action="/kz/deleteCourse" method="GET">
                             <input type="hidden" value="${courseID}" name="courseID"/>
                             <button type="submit" class="btn btn-primary">${deleteCourse}</button>
                         </form>
-                    </c:otherwise>
+                    </c:when>
                 </c:choose>
             </c:if>
             <c:if test="${sessionScope.role eq 'teacher'}">
@@ -74,7 +70,7 @@
                     <h2>${courseComments}:</h2>
                     --------------------------------<br/>
                     <c:forEach items="${feedback}" var="comment">
-                        <p class="text-info">${comment.feedbackDate}</p>
+                        <p class="text-info">${comment.feedbackDate} ${comment.userFullName}:</p>
                         <p class="text-secondary">${comment.feedbackText}</p>
                         --------------------------------<br/>
                     </c:forEach>

@@ -3,10 +3,8 @@ package com.epam.training.action;
 import com.epam.training.dao.CourseDao;
 import com.epam.training.dao.CourseUserDao;
 import com.epam.training.dao.FeedbackDao;
-import com.epam.training.dao.UserDao;
 import com.epam.training.entity.Course;
 import com.epam.training.entity.Feedback;
-import com.epam.training.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +27,12 @@ public class ShowCourseAction implements Action {
         int userId = (int) request.getSession().getAttribute(ATT_USER_ID);
         CourseUserDao courseUserDao = new CourseUserDao();
 
+        FeedbackDao feedbackDao = new FeedbackDao();
+        List<Feedback> feedback = feedbackDao.findByCourseId(Integer.parseInt(courseId));
+        request.setAttribute(ATT_COURSE_FEEDBACK, feedback);
+
         if(courseEndDate.before(currentDate)){
-            if(courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId))){
+            if(courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId)) && !feedbackDao.findByCourseUserId(Integer.parseInt(courseId), userId)){
                 request.setAttribute(ATT_COURSE_ADD_COMMENT, true);
             }
             if(userId==course.getIdUser()){
@@ -39,14 +41,13 @@ public class ShowCourseAction implements Action {
         } else {
             if(!courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId))){
                 request.setAttribute(ATT_COURSE_ADD , true);
+            } else {
+                request.setAttribute(ATT_COURSE_DELETE_COMMENT, true);
             }
             if(userId==course.getIdUser()){
                 request.setAttribute(ATT_COURSE_EDIT , true);
             }
         }
-        FeedbackDao feedbackDao = new FeedbackDao();
-        List<Feedback> feedback = feedbackDao.findByCourseId(Integer.parseInt(courseId));
-        request.setAttribute(ATT_COURSE_FEEDBACK, feedback);
         return new ActionResult(COURSE);
     }
 
@@ -55,14 +56,7 @@ public class ShowCourseAction implements Action {
         request.setAttribute(ATT_COURSE_NAME , course.getCourseName());
         request.setAttribute(ATT_COURSE_DATE_START , course.getStartDate());
         request.setAttribute(ATT_COURSE_DATE_END , course.getEndDate());
-        request.setAttribute(ATT_COURSE_TEACHER , getTeacherName(course));
+        request.setAttribute(ATT_COURSE_TEACHER , course.getTeacherFullName());
         request.setAttribute(ATT_COURSE_DESCRIPTION , course.getDescription());
-    }
-
-    private String getTeacherName(Course course){
-        int teacherID = course.getIdUser();
-        UserDao userDao = new UserDao();
-        User user = userDao.findById(teacherID);
-        return user.getName() + " " + user.getSurname();
     }
 }

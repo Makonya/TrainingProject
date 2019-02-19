@@ -86,6 +86,7 @@ public class AccessFilter implements Filter {
         teacherAccess.add("/course");
         teacherAccess.add("/editCourse");
         teacherAccess.add("/addMarks");
+        teacherAccess.add("/myCourses");
     }
 
     private void initStudent() {
@@ -98,6 +99,7 @@ public class AccessFilter implements Filter {
         studentAccess.add("/addCourse");
         studentAccess.add("/addComment");
         studentAccess.add("/deleteCourse");
+        studentAccess.add("/myCourses");
     }
 
     private void initAdmin() {
@@ -107,6 +109,8 @@ public class AccessFilter implements Filter {
         adminAccess.add("/logout");
         adminAccess.add("/profile");
         adminAccess.add("/course");
+        adminAccess.add("/editCourse");
+        adminAccess.add("/addMarks");
     }
 
     @Override

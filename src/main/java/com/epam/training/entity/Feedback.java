@@ -7,6 +7,7 @@ public class Feedback extends BaseEntity {
     private Date feedbackDate;
     private int idCourse;
     private int idUser;
+    private String userFullName;
 
     public String getFeedbackText() {
         return feedbackText;
@@ -38,5 +39,13 @@ public class Feedback extends BaseEntity {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 }

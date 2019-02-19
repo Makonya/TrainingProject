@@ -11,7 +11,7 @@ import java.util.List;
 public class CourseDao extends AbstractDao<Course> {
     private static Logger logger = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
-    private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE WHERE ID_COURSE=?";
+    private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
 
     @Override
@@ -39,6 +39,7 @@ public class CourseDao extends AbstractDao<Course> {
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
                     course = getCourseParameters(resultSet);
+                    course.setTeacherFullName(resultSet.getString("u.NAME") + " " +resultSet.getString("u.SURNAME"));
                 }
             }
         } catch (SQLException e) {

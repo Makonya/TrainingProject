@@ -1,7 +1,7 @@
 package com.epam.training.util;
 
 public class AppConstant {
-    public static final String DIRECTORY = "C://Users//k_mak//IdeaProjects//TrainingProject//";
+    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
     public static final String IMAGES_DIRECTORY = "src//main//webapp//images//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
@@ -13,6 +13,7 @@ public class AppConstant {
     public static final String LIST_OF_COURSES =             "listOfCourses";
     public static final String PROFILE =             "profile";
     public static final String COURSE =             "course";
+    public static final String MY_COURSES =             "myCourses";
     //View
     public static final String PATH_TO_JSP = "/WEB-INF/jsp/";
     public static final String JSP_FORMAT = ".jsp";
@@ -86,6 +87,7 @@ public class AppConstant {
     public static final String ATT_COURSE_MARK = "markStudents";
     public static final String ATT_COURSE_FEEDBACK = "feedback";
     public static final String ATT_COURSE_COMMENT_TEXT = "myComment";
-    public static final String ATT_COURSE_ADD_COMMENT_SUCCESS = "add_comment_success";
+    public static final String ATT_COURSE_DELETE_COMMENT = "student_delete_course";
 
+    public static final String ATT_MY_COURSES = "courseUsers";
 }

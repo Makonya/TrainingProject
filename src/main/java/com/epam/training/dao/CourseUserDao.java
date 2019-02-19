@@ -8,11 +8,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseUserDao extends AbstractDao<CourseUser> {
     private static Logger logger = Logger.getLogger(CourseUser.class);
     private static final String SQL_SELECT_COURSE_USER_BY_USER_COURSE_ID = "SELECT * FROM COURSE_USER WHERE ID_USER=? AND ID_COURSE=?";
+    private static final String SQL_SELECT_COURSE_USER_BY_USER_ID = "SELECT * FROM COURSE_USER c_u " +
+            "LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER " +
+            "LEFT JOIN MARK m ON m.ID_COURSE=c_u.ID_COURSE AND c_u.ID_USER=m.ID_USER " +
+            "LEFT JOIN COURSE c ON c.ID_COURSE=c_u.ID_COURSE where c_u.ID_USER=?";
     private static final String SQL_INSERT_COURSE_USER = "INSERT INTO COURSE_USER(ID_USER,ID_COURSE) VALUES(?,?)";
     private static final String SQL_DELETE_COURSE_USER = "DELETE FROM COURSE_USER WHERE ID_USER=? AND ID_COURSE=?";
 
@@ -35,6 +40,30 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
         return exist;
     }
 
+    public List<CourseUser> findByUserId(int userID) {
+        List<CourseUser> courseUsers = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_USER_BY_USER_ID)) {
+            preparedStatement.setInt(1, userID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    CourseUser courseUser = new CourseUser();
+                    courseUser.setIdCourse(resultSet.getInt("ID_COURSE"));
+                    courseUser.setIdUser(resultSet.getInt("ID_USER"));
+                    courseUser.setTemplStartDate(resultSet.getDate("START_DATE"));
+                    courseUser.setTemplEndDate(resultSet.getDate("END_DATE"));
+                    courseUser.setTemplMark(resultSet.getInt("MARK"));
+                    courseUser.setTemplCourseName(resultSet.getString("COURSE_NAME"));
+                    courseUsers.add(courseUser);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return courseUsers;
+    }
     @Override
     public List<CourseUser> findAll() {
         return null;

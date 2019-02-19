@@ -26,9 +26,7 @@ public class AddCommentAction implements Action {
         feedback.setIdCourse(Integer.parseInt(courseId));
         feedback.setIdUser(userId);
         FeedbackDao feedbackDao = new FeedbackDao();
-        if(feedbackDao.insert(feedback)){
-            request.setAttribute(ATT_COURSE_ADD_COMMENT_SUCCESS, true);
-        }
+        feedbackDao.insert(feedback);
         return new ActionResult(request.getHeader(REFERER), true);
     }
 }

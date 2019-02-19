@@ -9,7 +9,7 @@
     <fmt:message key="courses.categories.show.all" var="allCategories"/>
 </fmt:bundle>
 
-<my:designPattern role="guest">
+<my:designPattern role="">
 
     <div class="row py-5">
         <div class="col-md-3 col-12">

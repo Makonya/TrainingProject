@@ -16,6 +16,7 @@
     <fmt:message key="main.footer.contact" var="MContact"/>
     <fmt:message key="main.footer.logout" var="MLogout"/>
     <fmt:message key="main.footer.edit" var="MEdit"/>
+    <fmt:message key="main.my.courses" var="MCourses"/>
 </fmt:bundle>
 <html lang=${sessionScope.lang}>
 <head>
@@ -53,6 +54,7 @@
                             ${MProfile}
                     </button>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/kz/myCourses">${MCourses}</a>
                         <a class="dropdown-item" href="/kz/profile">${MEdit}</a>
                         <a class="dropdown-item" href="/kz/logout">${MLogout}</a>
                     </div>
