@@ -1,18 +1,12 @@
 package com.epam.training.action;
 
-import com.epam.training.dao.CourseDao;
-import com.epam.training.entity.Course;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Locale;
 
 import static com.epam.training.util.AppConstant.*;
 

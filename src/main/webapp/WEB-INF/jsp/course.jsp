@@ -18,6 +18,7 @@
     <fmt:message key="main.back" var="MBack"/>
     <fmt:message key="course.comments" var="courseComments"/>
     <fmt:message key="course.comment.add.success" var="comment_add_success"/>
+    <fmt:message key="main.my.courses" var="MCourses"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -64,6 +65,7 @@
                     <a href="/kz/addMarks?courseID=${courseID}" class="btn btn-primary">${courseAddMarks}</a>
                 </c:if>
             </c:if>
+            <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br/><br/>
             <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a><br/><br/>
             <c:if test="${not empty feedback}">
                 <div class="jumbotron">

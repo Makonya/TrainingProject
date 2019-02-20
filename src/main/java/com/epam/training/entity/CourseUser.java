@@ -5,10 +5,10 @@ import java.util.Date;
 public class CourseUser extends BaseEntity {
     private int idCourse;
     private int idUser;
-    private int templMark;
-    private Date templStartDate;
-    private Date templEndDate;
-    private String templCourseName;
+    private int tempMark;
+    private Date tempStartDate;
+    private Date tempEndDate;
+    private String tempCourseName;
 
     public int getIdCourse() {
         return idCourse;
@@ -26,35 +26,35 @@ public class CourseUser extends BaseEntity {
         this.idUser = idUser;
     }
 
-    public int getTemplMark() {
-        return templMark;
+    public int getTempMark() {
+        return tempMark;
     }
 
-    public void setTemplMark(int templMark) {
-        this.templMark = templMark;
+    public void setTempMark(int tempMark) {
+        this.tempMark = tempMark;
     }
 
-    public Date getTemplStartDate() {
-        return templStartDate;
+    public Date getTempStartDate() {
+        return tempStartDate;
     }
 
-    public void setTemplStartDate(Date templStartDate) {
-        this.templStartDate = templStartDate;
+    public void setTempStartDate(Date tempStartDate) {
+        this.tempStartDate = tempStartDate;
     }
 
-    public Date getTemplEndDate() {
-        return templEndDate;
+    public Date getTempEndDate() {
+        return tempEndDate;
     }
 
-    public void setTemplEndDate(Date templEndDate) {
-        this.templEndDate = templEndDate;
+    public void setTempEndDate(Date tempEndDate) {
+        this.tempEndDate = tempEndDate;
     }
 
-    public String getTemplCourseName() {
-        return templCourseName;
+    public String getTempCourseName() {
+        return tempCourseName;
     }
 
-    public void setTemplCourseName(String templCourseName) {
-        this.templCourseName = templCourseName;
+    public void setTempCourseName(String tempCourseName) {
+        this.tempCourseName = tempCourseName;
     }
 }

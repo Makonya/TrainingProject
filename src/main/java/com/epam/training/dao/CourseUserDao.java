@@ -50,10 +50,10 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
                     CourseUser courseUser = new CourseUser();
                     courseUser.setIdCourse(resultSet.getInt("ID_COURSE"));
                     courseUser.setIdUser(resultSet.getInt("ID_USER"));
-                    courseUser.setTemplStartDate(resultSet.getDate("START_DATE"));
-                    courseUser.setTemplEndDate(resultSet.getDate("END_DATE"));
-                    courseUser.setTemplMark(resultSet.getInt("MARK"));
-                    courseUser.setTemplCourseName(resultSet.getString("COURSE_NAME"));
+                    courseUser.setTempStartDate(resultSet.getDate("START_DATE"));
+                    courseUser.setTempEndDate(resultSet.getDate("END_DATE"));
+                    courseUser.setTempMark(resultSet.getInt("MARK"));
+                    courseUser.setTempCourseName(resultSet.getString("COURSE_NAME"));
                     courseUsers.add(courseUser);
                 }
             }

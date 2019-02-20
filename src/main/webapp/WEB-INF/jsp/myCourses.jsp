@@ -32,34 +32,32 @@
                     <th>${endDate}</th>
                     <c:if test="${sessionScope.role eq 'student'}">
                         <th>${courseMark}</th>
-                        <th>${deleteCourse}</th>
-                    </c:if>
-                    <c:if test="${sessionScope.role eq 'teacher'}">
-                        <th>${addMarks}</th>
-                        <th>${courseEdit}</th>
                     </c:if>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${courseUsers}" var="courseUser">
-                    <tr>
-                        <td><a href="/kz/course?courseID=${courseUser.idCourse}" class="card-link">${courseUser.templCourseName}</a></td>
-                        <td>${courseUser.templStartDate}</td>
-                        <td>${courseUser.templEndDate}</td>
-                        <c:if test="${sessionScope.role eq 'student'}">
-                            <td>${courseUser.templMark}</td>
-                            <td>
-                                <a href="/kz/deleteCourse?courseID=${courseUser.idCourse}" class="btn btn-primary">${deleteCourse}</a>
-                            </td>
-                        </c:if>
-                        <c:if test="${sessionScope.role eq 'teacher'}">
-                            <td>${addMarks}</td>
-                            <td>${courseEdit}</td>
-                        </c:if>
-                    </tr>
+                    <c:if test="${sessionScope.role eq 'student'}">
+                        <tr>
+                            <td><a href="/kz/course?courseID=${courseUser.idCourse}"
+                                   class="card-link">${courseUser.tempCourseName}</a></td>
+                            <td>${courseUser.tempStartDate}</td>
+                            <td>${courseUser.tempEndDate}</td>
+                            <td>${courseUser.tempMark}</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${sessionScope.role eq 'teacher'}">
+                        <tr>
+                            <td><a href="/kz/course?courseID=${courseUser.id}"
+                                   class="card-link">${courseUser.courseName}</a></td>
+                            <td>${courseUser.startDate}</td>
+                            <td>${courseUser.endDate}</td>
+                        </tr>
+                    </c:if>
                 </c:forEach>
                 </tbody>
-            </table><br>
+            </table>
+            <br>
             <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a>
         </div>
         <div class="col-md-1 col-12"></div>

@@ -12,7 +12,9 @@ public class CourseDao extends AbstractDao<Course> {
     private static Logger logger = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
+    private static final String SQL_SELECT_COURSE_BY_USER_ID = "SELECT * FROM COURSE where ID_USER=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
+    private static final String SQL_UPDATE_COURSE = "UPDATE COURSE SET COURSE_NAME = ?, DESCRIPTION = ?, START_DATE = ?, END_DATE = ? WHERE ID_COURSE = ?";
 
     @Override
     public List<Course> findAll() {
@@ -36,10 +38,10 @@ public class CourseDao extends AbstractDao<Course> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_ID)) {
             preparedStatement.setInt(1, idCourse);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     course = getCourseParameters(resultSet);
-                    course.setTeacherFullName(resultSet.getString("u.NAME") + " " +resultSet.getString("u.SURNAME"));
+                    course.setTeacherFullName(resultSet.getString("u.NAME") + " " + resultSet.getString("u.SURNAME"));
                 }
             }
         } catch (SQLException e) {
@@ -67,7 +69,22 @@ public class CourseDao extends AbstractDao<Course> {
 
     @Override
     public boolean update(Course entity) {
-        return false;
+        boolean updated = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_COURSE)) {
+            preparedStatement.setString(1, entity.getCourseName());
+            preparedStatement.setString(2, entity.getDescription());
+            preparedStatement.setDate(3, (Date) entity.getStartDate());
+            preparedStatement.setDate(4, (Date) entity.getEndDate());
+            preparedStatement.setInt(5, entity.getId());
+            preparedStatement.executeUpdate();
+            updated = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return updated;
     }
 
     public List<Course> findByCategoryId(int categoryId) {
@@ -86,6 +103,24 @@ public class CourseDao extends AbstractDao<Course> {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
         return users;
+    }
+
+    public List<Course> findByUserId(int userId) {
+        List<Course> courses = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_USER_ID)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    courses.add(getCourseParameters(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return courses;
     }
 
     private Course getCourseParameters(ResultSet resultSet) throws SQLException {

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
-
 import static com.epam.training.util.AppConstant.*;
 
 public class AddCommentAction implements Action {

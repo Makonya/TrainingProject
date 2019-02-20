@@ -11,6 +11,7 @@ import java.util.Locale;
 import org.apache.log4j.*;
 
 import static com.epam.training.util.AppConstant.*;
+
 public class ChangeLanguageAction implements Action {
     private static Logger logger = Logger.getLogger(ChangeLanguageAction.class);
     @Override

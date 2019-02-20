@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.epam.training.util.AppConstant.*;
-import static com.epam.training.util.AppConstant.SURNAME_VALIDATION;
 import static com.epam.training.util.Validation.checkParamValid;
 
 public class EditProfileDataAction implements Action {

@@ -14,6 +14,8 @@ public class AppConstant {
     public static final String PROFILE =             "profile";
     public static final String COURSE =             "course";
     public static final String MY_COURSES =             "myCourses";
+    public static final String EDIT_COURSE =             "editCourse";
+
     //View
     public static final String PATH_TO_JSP = "/WEB-INF/jsp/";
     public static final String JSP_FORMAT = ".jsp";
@@ -26,12 +28,12 @@ public class AppConstant {
     public static final int MINUTE = 60;
     public static final int SEC = 60;
 
-    //login
+    //Login
     public static final String LOGIN =                "login";
     public static final String PASSWORD =             "password";
     public static final String LOGIN_ERROR = "login_error";
 
-    //register
+    //Register
     public static final String NAME = "name";
     public static final String PASSWORD_REPEAT = "password2";
     public static final String SURNAME = "surname";
@@ -44,7 +46,7 @@ public class AppConstant {
     public static final String SURNAME_VAL_ERROR = "surname_val_error";
     public static final String EMAIL_VAL_ERROR = "email_val_error";
 
-    //listOfCourses
+    //ListOfCourses
     public static final String ATT_CATEGORIES = "categories";
     public static final String ATT_COURSES = "courses";
     public static final String ATT_CATEGORY_ID = "categoryID";
@@ -54,10 +56,11 @@ public class AppConstant {
     public static final String ATT_ROLE =        "role";
     public static final String ATT_ROLE_ID =     "role_id";
 
-    //
+    //Roles
     public static final String STUDENT_ROLE = "student";
+    public static final String TEACHER_ROLE = "teacher";
 
-    //validation
+    //Validation
     public static final String PASSWORD_VALIDATION = ".{6,}";
     public static final String LOGIN_VALIDATION = ".{4,}";
     public static final String NAME_VALIDATION = "\\p{L}{1,45}";
@@ -66,15 +69,16 @@ public class AppConstant {
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
     public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
+//    public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
 
-    //profile
+    //Profile
     public static final String INPUT_LOGIN = "loginInput";
     public static final String INPUT_NAME = "nameInput";
     public static final String INPUT_SURNAME = "surnameInput";
     public static final String INPUT_EMAIL = "emailInput";
     public static final String EDIT_SUCCESS = "edit_success";
 
-    //course
+    //Course
     public static final String ATT_COURSE_ID = "courseID";
     public static final String ATT_COURSE_NAME = "courseName";
     public static final String ATT_COURSE_DATE_START = "courseStartDate";
@@ -90,4 +94,19 @@ public class AppConstant {
     public static final String ATT_COURSE_DELETE_COMMENT = "student_delete_course";
 
     public static final String ATT_MY_COURSES = "courseUsers";
+
+    public static final String INPUT_COURSE_NAME = "nameInput";
+    public static final String INPUT_COURSE_DESCRIPTION = "descriptionInput";
+    public static final String INPUT_COURSE_DATE_START = "startDateInput";
+    public static final String DESCRIPTION = "description";
+    public static final String COURSE_NAME = "courseName";
+    public static final String COURSE_START_DATE = "startDate";
+    public static final String COURSE_END_DATE = "endDate";
+    public static final String INPUT_COURSE_DATE_END = "endDateInput";
+    public static final String COURSE_START_DATE_VAL_ERROR = "start_date_val_error";
+    public static final String COURSE_END_DATE_VAL_ERROR = "end_date_val_error";
+    public static final String COURSE_START_END_DATE_VAL_ERROR = "start_end_date_val_error";
+    public static final String COURSE_DESCRIPTION_VAL_ERROR = "description_val_error";
+    public static final String COURSE_NAME_VAL_ERROR = "name_val_error";
+    public static final String COURSE_EDIT_SUCCESS = "course_edit_success";
 }
