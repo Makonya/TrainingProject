@@ -30,7 +30,7 @@ public class EditCourseAction implements Action {
         CourseDao courseDao = new CourseDao();
 
         switch (request.getMethod()){
-            case "POST":
+            case METHOD_POST:
                 getParameters(request);
                 parametersValidation(request);
                 if(correctness == 0){
@@ -46,7 +46,7 @@ public class EditCourseAction implements Action {
                     setEditedAttributes(request);
                 }
                 break;
-            case "GET":
+            case METHOD_GET:
                 Course course = courseDao.findById(courseId);
                 setAttributes(request, course);
                 break;

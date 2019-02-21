@@ -15,6 +15,10 @@ public class AppConstant {
     public static final String COURSE =             "course";
     public static final String MY_COURSES =             "myCourses";
     public static final String EDIT_COURSE =             "editCourse";
+    public static final String ADD_MARKS =             "addMarks";
+
+    public static final String METHOD_GET = "GET";
+    public static final String METHOD_POST = "POST";
 
     //View
     public static final String PATH_TO_JSP = "/WEB-INF/jsp/";
@@ -69,6 +73,7 @@ public class AppConstant {
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
     public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
+    public static final String MARK_VALIDATION = "[2-5]{1}";
 //    public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
 
     //Profile
@@ -109,4 +114,10 @@ public class AppConstant {
     public static final String COURSE_DESCRIPTION_VAL_ERROR = "description_val_error";
     public static final String COURSE_NAME_VAL_ERROR = "name_val_error";
     public static final String COURSE_EDIT_SUCCESS = "course_edit_success";
+
+    //Add marks
+    public static final String ATT_MARKS = "marks";
+    public static final String TOTAL = "total";
+    public static final String MARK_USER = "userId";
+
 }

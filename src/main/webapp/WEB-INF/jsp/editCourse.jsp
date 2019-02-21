@@ -52,7 +52,7 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" rows="5" id="startDate" name="startDate" value="${startDateInput}">
+                    <input type="text" class="form-control" id="startDate" name="startDate" value="${startDateInput}" data-mask="____-__-__">
                 </div>
                 <div class="form-group">
                     <label for="endDate">${endDate}</label>
@@ -64,11 +64,52 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorStartEndDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" rows="5" id="endDate" name="endDate" value="${endDateInput}">
+                    <input type="text" class="form-control" id="endDate" name="endDate" value="${endDateInput}"  data-mask="____-__-__">
                 </div>
                 <button type="submit" class="btn btn-primary">${safe}</button>
                 <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a>
             </form>
+            <script>
+                Array.prototype.forEach.call(document.body.querySelectorAll("*[data-mask]"), applyDataMask);
+
+                function applyDataMask(field) {
+                    var mask = field.dataset.mask.split('');
+
+                    // For now, this just strips everything that not a number
+                    function stripMask(maskedData) {
+                        function isDigit(char) {
+                            return /\d/.test(char);
+                        }
+                        return maskedData.split('').filter(isDigit);
+                    }
+
+                    // Replace `_` characters with characters from `data`
+                    function applyMask(data) {
+                        return mask.map(function(char) {
+                            if (char != '_') return char;
+                            if (data.length == 0) return char;
+                            return data.shift();
+                        }).join('')
+                    }
+
+                    function reapplyMask(data) {
+                        return applyMask(stripMask(data));
+                    }
+
+                    function changed() {
+                        var oldStart = field.selectionStart;
+                        var oldEnd = field.selectionEnd;
+
+                        field.value = reapplyMask(field.value);
+
+                        field.selectionStart = oldStart;
+                        field.selectionEnd = oldEnd;
+                    }
+
+                    field.addEventListener('click', changed)
+                    field.addEventListener('keyup', changed)
+                }
+            </script>
         </div>
         <div class="col-md-2 col-12"></div>
     </div>

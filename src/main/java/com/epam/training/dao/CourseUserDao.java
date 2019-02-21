@@ -18,8 +18,36 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
             "LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER " +
             "LEFT JOIN MARK m ON m.ID_COURSE=c_u.ID_COURSE AND c_u.ID_USER=m.ID_USER " +
             "LEFT JOIN COURSE c ON c.ID_COURSE=c_u.ID_COURSE where c_u.ID_USER=?";
+    private static final String SQL_SELECT_COURSE_USER_BY_COURSE_ID = "SELECT * FROM COURSE_USER c_u " +
+            "LEFT JOIN MARK m ON c_u.ID_COURSE=m.ID_COURSE AND c_u.ID_USER=m.ID_USER " +
+            "LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER " +
+            "WHERE c_u.ID_COURSE=?";
     private static final String SQL_INSERT_COURSE_USER = "INSERT INTO COURSE_USER(ID_USER,ID_COURSE) VALUES(?,?)";
     private static final String SQL_DELETE_COURSE_USER = "DELETE FROM COURSE_USER WHERE ID_USER=? AND ID_COURSE=?";
+
+    public List<CourseUser> findByCourseId(int courseId) {
+        List<CourseUser> courseUsers = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_USER_BY_COURSE_ID)) {
+            preparedStatement.setInt(1, courseId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    CourseUser courseUser = new CourseUser();
+                    courseUser.setIdCourse(resultSet.getInt("ID_COURSE"));
+                    courseUser.setIdUser(resultSet.getInt("ID_USER"));
+                    courseUser.setTempStudentName(resultSet.getString("u.NAME"));
+                    courseUser.setTempStudentSurname(resultSet.getString("u.SURNAME"));
+                    courseUser.setTempMark(resultSet.getInt("m.MARK"));
+                    courseUsers.add(courseUser);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return courseUsers;
+    }
 
     public boolean findByUserCourseId(int userID, int courseID) {
         boolean exist = false;
