@@ -14,7 +14,8 @@ public class CourseDao extends AbstractDao<Course> {
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_BY_USER_ID = "SELECT * FROM COURSE where ID_USER=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
-    private static final String SQL_UPDATE_COURSE = "UPDATE COURSE SET COURSE_NAME = ?, DESCRIPTION = ?, START_DATE = ?, END_DATE = ? WHERE ID_COURSE = ?";
+    private static final String SQL_INSERT_COURSE = "INSERT INTO COURSE(COURSE_NAME,DESCRIPTION,START_DATE,END_DATE,ID_USER,ID_CATEGORY) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE_COURSE = "UPDATE COURSE SET COURSE_NAME = ?, DESCRIPTION = ?, START_DATE = ?, END_DATE = ? WHERE ID_COURSE=?";
 
     @Override
     public List<Course> findAll() {
@@ -64,7 +65,19 @@ public class CourseDao extends AbstractDao<Course> {
 
     @Override
     public boolean insert(Course entity) {
-        return false;
+        boolean inserted = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_COURSE)) {
+            preparedStatement.setInt(5, entity.getIdUser());
+            preparedStatement.setInt(6, entity.getIdCategory());
+            setValues(preparedStatement, entity).executeUpdate();
+            inserted = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return inserted;
     }
 
     @Override
@@ -72,12 +85,8 @@ public class CourseDao extends AbstractDao<Course> {
         boolean updated = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_COURSE)) {
-            preparedStatement.setString(1, entity.getCourseName());
-            preparedStatement.setString(2, entity.getDescription());
-            preparedStatement.setDate(3, (Date) entity.getStartDate());
-            preparedStatement.setDate(4, (Date) entity.getEndDate());
             preparedStatement.setInt(5, entity.getId());
-            preparedStatement.executeUpdate();
+            setValues(preparedStatement, entity).executeUpdate();
             updated = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,39 +97,11 @@ public class CourseDao extends AbstractDao<Course> {
     }
 
     public List<Course> findByCategoryId(int categoryId) {
-        List<Course> users = new ArrayList<>();
-        Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSES_BY_CATEGORY)) {
-            preparedStatement.setInt(1, categoryId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    users.add(getCourseParameters(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
-        } finally {
-            ConnectionPool.getConnectionPool().releaseConnection(connection);
-        }
-        return users;
+        return findBySomeId(SQL_SELECT_COURSES_BY_CATEGORY, categoryId);
     }
 
     public List<Course> findByUserId(int userId) {
-        List<Course> courses = new ArrayList<>();
-        Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_USER_ID)) {
-            preparedStatement.setInt(1, userId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    courses.add(getCourseParameters(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
-        } finally {
-            ConnectionPool.getConnectionPool().releaseConnection(connection);
-        }
-        return courses;
+        return findBySomeId(SQL_SELECT_COURSE_BY_USER_ID, userId);
     }
 
     private Course getCourseParameters(ResultSet resultSet) throws SQLException {
@@ -133,5 +114,31 @@ public class CourseDao extends AbstractDao<Course> {
         course.setIdUser(resultSet.getInt("ID_USER"));
         course.setIdCategory(resultSet.getInt("ID_CATEGORY"));
         return course;
+    }
+
+    private PreparedStatement setValues(PreparedStatement preparedStatement, Course entity) throws SQLException {
+        preparedStatement.setString(1, entity.getCourseName());
+        preparedStatement.setString(2, entity.getDescription());
+        preparedStatement.setDate(3, (Date) entity.getStartDate());
+        preparedStatement.setDate(4, (Date) entity.getEndDate());
+        return preparedStatement;
+    }
+
+    private List<Course> findBySomeId(String statement, int id){
+        List<Course> courses = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    courses.add(getCourseParameters(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return courses;
     }
 }

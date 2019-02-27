@@ -5,7 +5,7 @@ public class AppConstant {
     public static final String IMAGES_DIRECTORY = "src//main//webapp//images//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
-    //Name of pages for redirect овечкина
+    //Name of pages for redirect
     public static final String COURSES =             "listOfCourses";
     public static final String WELCOME =             "welcome";
     public static final String AUTHORIZATION =             "authorization";
@@ -16,6 +16,9 @@ public class AppConstant {
     public static final String MY_COURSES =             "myCourses";
     public static final String EDIT_COURSE =             "editCourse";
     public static final String ADD_MARKS =             "addMarks";
+    public static final String ADD_COURSE =             "addCourse";
+
+    public static final String DEFAULT_LANGUAGE = "ru";
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
@@ -72,9 +75,9 @@ public class AppConstant {
     public static final String EMAIL_VALIDATION = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
-    public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
+//    public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
     public static final String MARK_VALIDATION = "[2-5]{1}";
-//    public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+    public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
 
     //Profile
     public static final String INPUT_LOGIN = "loginInput";
@@ -119,5 +122,10 @@ public class AppConstant {
     public static final String ATT_MARKS = "marks";
     public static final String TOTAL = "total";
     public static final String MARK_USER = "userId";
+    public static final String MARKS_UPDATE_SUCCESS = "update_success";
+    public static final String MARKS_INSERT_SUCCESS = "insert_success";
+    public static final String MARKS_NO_CHANGES = "no_changes";
+    public static final String COURSE_CATEGORY = "category";
+    public static final String COURSE_CATEGORY_OPTION = "categoryOption";
 
 }

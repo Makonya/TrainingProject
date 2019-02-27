@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MarkDao extends AbstractDao<Mark> {
     private static Logger logger = Logger.getLogger(MarkDao.class);
-    private static String SQL_INSERT_MARKS = "INSERT INTO MARK(MARK, ID_COURSE, ID_USER) VALUES(?, ?, ?)";
-    private static String SQL_SELECT_BY_COURSE_USER_ID = "SELECT * FROM MARK WHERE ID_COURSE=? AND ID_USER=?";
+    private static final String SQL_INSERT_MARKS = "INSERT INTO MARK(MARK, ID_COURSE, ID_USER) VALUES(?, ?, ?)";
+    private static final String SQL_SELECT_BY_COURSE_USER_ID = "SELECT * FROM MARK WHERE ID_COURSE=? AND ID_USER=?";
     private static final String SQL_UPDATE_MARK = "UPDATE MARK SET MARK = ? WHERE ID_COURSE = ? AND ID_USER = ?";
 
 
@@ -34,7 +34,7 @@ public class MarkDao extends AbstractDao<Mark> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            logger.error("Errors occurred while accessing the mark table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -65,16 +65,20 @@ public class MarkDao extends AbstractDao<Mark> {
         boolean inserted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_MARKS)) {
+            connection.setAutoCommit(false);
             for (Mark mark : marks) {
-                preparedStatement.setInt(1, mark.getTotal());
-                preparedStatement.setInt(2, mark.getIdCourse());
-                preparedStatement.setInt(3, mark.getIdUser());
-                preparedStatement.addBatch();
+                setValues(preparedStatement, mark).addBatch();
             }
             preparedStatement.executeBatch();
+            connection.commit();
             logger.info("Created new mark records");
             inserted = true;
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                logger.error("Errors occurred while rollback process." + e1.getMessage());
+            }
             logger.error("New mark records were not inserted to db. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
@@ -87,16 +91,46 @@ public class MarkDao extends AbstractDao<Mark> {
         boolean updated = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_MARK)) {
-            preparedStatement.setInt(1, entity.getTotal());
-            preparedStatement.setInt(2, entity.getIdCourse());
-            preparedStatement.setInt(3, entity.getIdUser());
-            preparedStatement.executeUpdate();
+            setValues(preparedStatement, entity).executeUpdate();
             updated = true;
+            logger.info("Updated mark record");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Mark record was not updated. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
         return updated;
+    }
+
+    public boolean update(List<Mark> marks) {
+        boolean updated = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_MARK)) {
+            connection.setAutoCommit(false);
+            for (Mark mark : marks) {
+                setValues(preparedStatement, mark).addBatch();
+            }
+            preparedStatement.executeUpdate();
+            connection.commit();
+            updated = true;
+            logger.info("Updated mark records");
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                logger.error("Errors occurred while rollback process." + e1.getMessage());
+            }
+            logger.error("Mark records were not updated. " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return updated;
+    }
+
+    private PreparedStatement setValues(PreparedStatement preparedStatement, Mark mark) throws SQLException {
+        preparedStatement.setInt(1, mark.getTotal());
+        preparedStatement.setInt(2, mark.getIdCourse());
+        preparedStatement.setInt(3, mark.getIdUser());
+        return preparedStatement;
     }
 }

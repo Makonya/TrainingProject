@@ -28,7 +28,7 @@
     <fmt:message key="profile.edit.success" var="profile_edit_success"/>
     <fmt:message key="profile.capture" var="capture"/>
     <fmt:message key="profile.safe" var="safe"/>
-    <fmt:message key="main.back" var="MBack"/>
+    <fmt:message key="main.page" var="mainPage"/>
 </fmt:bundle>
 
 <my:designPattern role="guest">
@@ -88,7 +88,7 @@
                     <input type="text" class="form-control" id="email" placeholder="${enterEmail}" name="email" value="${emailInput}">
                 </div>
                 <button type="submit" class="btn btn-primary">${safe}</button>
-                <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a>
+                <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
             </form>
         </div>
         <div class="col-md-4"></div>

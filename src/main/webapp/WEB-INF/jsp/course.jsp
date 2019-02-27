@@ -15,7 +15,7 @@
     <fmt:message key="course.date.start" var="startDate"/>
     <fmt:message key="course.date.end" var="endDate"/>
     <fmt:message key="course.description" var="description"/>
-    <fmt:message key="main.back" var="MBack"/>
+    <fmt:message key="main.page" var="mainPage"/>
     <fmt:message key="course.comments" var="courseComments"/>
     <fmt:message key="course.comment.add.success" var="comment_add_success"/>
     <fmt:message key="main.my.courses" var="MCourses"/>
@@ -66,7 +66,7 @@
                 </c:if>
             </c:if>
             <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br/><br/>
-            <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a><br/><br/>
+            <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a><br/><br/>
             <c:if test="${not empty feedback}">
                 <div class="jumbotron">
                     <h2>${courseComments}:</h2>

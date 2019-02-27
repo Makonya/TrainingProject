@@ -15,7 +15,7 @@
     <fmt:message key="course.edit" var="courseEdit"/>
     <fmt:message key="course.delete.course" var="deleteCourse"/>
     <fmt:message key="course.add.marks" var="courseAddMarks"/>
-    <fmt:message key="main.back" var="MBack"/>
+    <fmt:message key="main.page" var="mainPage"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -58,7 +58,7 @@
                 </tbody>
             </table>
             <br>
-            <a href="/kz/listOfCourses" class="btn btn-primary">${MBack}</a>
+            <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
         </div>
         <div class="col-md-1 col-12"></div>
     </div>

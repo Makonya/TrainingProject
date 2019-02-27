@@ -45,12 +45,13 @@ public class LocaleDao extends AbstractDao<Locale> {
     }
 
     public Locale findByLocaleName(String localeName){
-        Locale locale = new Locale();
+        Locale locale = null;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_LOCALE_BY_NAME)) {
             preparedStatement.setString(1, localeName);
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
+                    locale = new Locale();
                     locale.setId(resultSet.getInt("ID_LOCALE"));
                     locale.setLocaleName(resultSet.getString("LOCALE_NAME"));
                 }

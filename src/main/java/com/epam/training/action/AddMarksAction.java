@@ -35,14 +35,23 @@ public class AddMarksAction implements Action {
                     mark.setIdCourse(courseId);
                     mark.setTotal(total);
                     if (markDao.findByCourseUserId(mark)) {
-                        markDao.update(mark);
+                        if (courseUsers.get(i-1).getTempMark() != mark.getTotal()){
+                            marksToUpdate.add(mark);
+                        }
                     } else {
                         marksToInsert.add(mark);
                     }
                 }
             }
-            if (!marksToInsert.isEmpty()) {
-                markDao.insert(marksToInsert);
+            if (marksToInsert.isEmpty() && marksToUpdate.isEmpty()){
+                if(markDao.insert(marksToInsert)) request.setAttribute(MARKS_NO_CHANGES, true);
+            } else {
+                if (!marksToInsert.isEmpty()) {
+                    if(markDao.insert(marksToInsert)) request.setAttribute(MARKS_INSERT_SUCCESS, true);
+                }
+                if(!marksToUpdate.isEmpty()){
+                    if(markDao.update(marksToUpdate)) request.setAttribute(MARKS_UPDATE_SUCCESS, true);
+                }
             }
             courseUsers = courseUserDao.findByCourseId(courseId);
         }

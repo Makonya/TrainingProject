@@ -11,6 +11,7 @@ import java.util.List;
 public class CategoryDao extends AbstractDao<Category> {
     private static Logger logger = Logger.getLogger(CategoryDao.class);
     private static final String SQL_SELECT_CATEGORY_BY_LOCALE_ID = "SELECT * FROM CATEGORY WHERE ID_LOCALE=?";
+    private static final String SQL_SELECT_CATEGORY_BY_NAME = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME=?";
 
     @Override
     public List<Category> findAll() {
@@ -42,6 +43,27 @@ public class CategoryDao extends AbstractDao<Category> {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
         return categories;
+    }
+
+    public Category findAllByName(String categoryName) {
+        Category category = null;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_CATEGORY_BY_NAME)) {
+            preparedStatement.setString(1, categoryName);
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    category = new Category();
+                    category.setId(resultSet.getInt("ID_CATEGORY"));
+                    category.setCategoryName(resultSet.getString("CATEGORY_NAME"));
+                    category.setIdLocale(resultSet.getInt("ID_LOCALE"));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the category table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return category;
     }
 
     @Override

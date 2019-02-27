@@ -30,12 +30,14 @@ public class ActionFactory {
         actionsMap.put("GET/myCourses", new ShowMyCoursesAction());
         actionsMap.put("GET/editCourse", new EditCourseAction());
         actionsMap.put("GET/addMarks", new AddMarksAction());
+        actionsMap.put("GET/addNewCourse", new AddNewCourse());
 
         actionsMap.put("POST/authorization", new LoginAction());
         actionsMap.put("POST/registration", new RegisterAction());
         actionsMap.put("POST/profile", new EditProfileDataAction());
         actionsMap.put("POST/editCourse", new EditCourseAction());
         actionsMap.put("POST/addMarks", new AddMarksAction());
+        actionsMap.put("POST/addNewCourse", new AddNewCourse());
     }
 
     public Action getAction(HttpServletRequest request){

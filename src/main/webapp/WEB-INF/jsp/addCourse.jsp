@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
-<c:url var="course_url" value="/kz/editCourse?courseID=${courseID}"/>
 <%@ page isELIgnored="false" %>
 
 <fmt:bundle basename="i18n">
@@ -17,6 +16,7 @@
     <fmt:message key="profile.safe" var="safe"/>
     <fmt:message key="main.page" var="mainPage"/>
     <fmt:message key="course.edit.success" var="courseEditSuccess"/>
+    <fmt:message key="course.add.category" var="selectCategory"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -28,7 +28,7 @@
                 <p class="alert alert-success"
                    style="height: 30px;padding: 5px">${courseEditSuccess}</p>
             </c:if>
-            <form action="${course_url}" method="POST">
+            <form action="/kz/addNewCourse" method="POST">
                 <div class="form-group">
                     <label for="courseName">${courseName}:</label>
                     <c:if test="${not empty name_val_error}">
@@ -39,23 +39,33 @@
                            name="courseName" value="${nameInput}">
                 </div>
                 <div class="form-group">
-                    <label for="description">${description}</label>
+                    <label for="category">${selectCategory}:</label>
+                    <select class="form-control" id="category" name="category" value="${categoryOption}">
+                        <c:forEach items="${categories}" var="category">
+                            <option>${category.categoryName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">${description}:</label>
                     <c:if test="${not empty description_val_error}">
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDescription}</p>
                     </c:if>
-                    <textarea class="form-control" rows="5" id="description" name="description">${descriptionInput}</textarea>
+                    <textarea class="form-control" rows="5" id="description"
+                              name="description">${descriptionInput}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="startDate">${startDate}</label>
+                    <label for="startDate">${startDate}:</label>
                     <c:if test="${not empty start_date_val_error}">
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="startDate" name="startDate" value="${startDateInput}" data-mask="____-__-__">
+                    <input type="text" class="form-control" id="startDate" name="startDate" value="${startDateInput}"
+                           data-mask="____-__-__">
                 </div>
                 <div class="form-group">
-                    <label for="endDate">${endDate}</label>
+                    <label for="endDate">${endDate}:</label>
                     <c:if test="${not empty end_date_val_error}">
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDate}</p>
@@ -64,7 +74,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorStartEndDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="endDate" name="endDate" value="${endDateInput}"  data-mask="____-__-__">
+                    <input type="text" class="form-control" id="endDate" name="endDate" value="${endDateInput}"
+                           data-mask="____-__-__">
                 </div>
                 <button type="submit" class="btn btn-primary">${safe}</button>
                 <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
@@ -80,12 +91,13 @@
                         function isDigit(char) {
                             return /\d/.test(char);
                         }
+
                         return maskedData.split('').filter(isDigit);
                     }
 
                     // Replace `_` characters with characters from `data`
                     function applyMask(data) {
-                        return mask.map(function(char) {
+                        return mask.map(function (char) {
                             if (char != '_') return char;
                             if (data.length == 0) return char;
                             return data.shift();
