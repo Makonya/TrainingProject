@@ -110,6 +110,7 @@ public class AccessFilter implements Filter {
         adminAccess.add("/logout");
         adminAccess.add("/profile");
         adminAccess.add("/course");
+        adminAccess.add("/addCategory");
     }
 
     @Override

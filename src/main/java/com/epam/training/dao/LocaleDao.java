@@ -4,19 +4,32 @@ import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.Locale;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocaleDao extends AbstractDao<Locale> {
     private static Logger logger = Logger.getLogger(LocaleDao.class);
     private static final String SQL_SELECT_LOCALE_BY_NAME = "SELECT * FROM LOCALE WHERE LOCALE_NAME=?";
+    private static final String SQL_SELECT_ALL_LOCALES = "SELECT * FROM LOCALE";
 
     @Override
     public List<Locale> findAll() {
-        return null;
+        List<Locale> locales = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_LOCALES)) {
+            while (resultSet.next()) {
+                Locale locale = new Locale();
+                locale.setId(resultSet.getInt("ID_LOCALE"));
+                locale.setLocaleName(resultSet.getString("LOCALE_NAME"));
+                locales.add(locale);
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return locales;
     }
 
     @Override

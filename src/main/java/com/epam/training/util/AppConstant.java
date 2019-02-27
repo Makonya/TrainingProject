@@ -17,6 +17,7 @@ public class AppConstant {
     public static final String EDIT_COURSE =             "editCourse";
     public static final String ADD_MARKS =             "addMarks";
     public static final String ADD_COURSE =             "addCourse";
+    public static final String ADD_CATEGORY =             "addCategory";
 
     public static final String DEFAULT_LANGUAGE = "ru";
 
@@ -127,5 +128,7 @@ public class AppConstant {
     public static final String MARKS_NO_CHANGES = "no_changes";
     public static final String COURSE_CATEGORY = "category";
     public static final String COURSE_CATEGORY_OPTION = "categoryOption";
+
+    public static final String ATT_LOCALES = "locales";
 
 }

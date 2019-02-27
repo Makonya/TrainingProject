@@ -31,6 +31,7 @@ public class ActionFactory {
         actionsMap.put("GET/editCourse", new EditCourseAction());
         actionsMap.put("GET/addMarks", new AddMarksAction());
         actionsMap.put("GET/addNewCourse", new AddNewCourse());
+        actionsMap.put("GET/addCategory", new AddCategoryAction());
 
         actionsMap.put("POST/authorization", new LoginAction());
         actionsMap.put("POST/registration", new RegisterAction());
@@ -38,6 +39,7 @@ public class ActionFactory {
         actionsMap.put("POST/editCourse", new EditCourseAction());
         actionsMap.put("POST/addMarks", new AddMarksAction());
         actionsMap.put("POST/addNewCourse", new AddNewCourse());
+        actionsMap.put("POST/addCategory", new AddCategoryAction());
     }
 
     public Action getAction(HttpServletRequest request){

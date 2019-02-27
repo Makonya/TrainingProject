@@ -17,6 +17,7 @@
     <fmt:message key="main.footer.logout" var="MLogout"/>
     <fmt:message key="main.footer.edit" var="MEdit"/>
     <fmt:message key="main.my.courses" var="MCourses"/>
+    <fmt:message key="main.header.add.category" var="MAddCategory"/>
 </fmt:bundle>
 <html lang=${sessionScope.lang}>
 <head>
@@ -55,6 +56,9 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/kz/myCourses">${MCourses}</a>
+                        <c:if test="${sessionScope.role eq 'admin'}">
+                            <a class="dropdown-item" href="/kz/addCategory">${MAddCategory}</a>
+                        </c:if>
                         <a class="dropdown-item" href="/kz/profile">${MEdit}</a>
                         <a class="dropdown-item" href="/kz/logout">${MLogout}</a>
                     </div>
