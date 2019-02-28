@@ -1,5 +1,6 @@
 package com.epam.training.dao;
 
+import com.epam.training.entity.Mark;
 import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.Category;
 import org.apache.log4j.Logger;
@@ -12,6 +13,8 @@ public class CategoryDao extends AbstractDao<Category> {
     private static Logger logger = Logger.getLogger(CategoryDao.class);
     private static final String SQL_SELECT_CATEGORY_BY_LOCALE_ID = "SELECT * FROM CATEGORY WHERE ID_LOCALE=?";
     private static final String SQL_SELECT_CATEGORY_BY_NAME = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME=?";
+    private static final String SQL_INSERT_CATEGORY = "INSERT INTO CATEGORY(ID_LOCALE, CATEGORY_NAME, ID_CATEGORY) VALUES(?, ?, ?)";
+    private static final String SQL_SELECT_LAST_CATEGORY_ID = "SELECT MAX(ID_CATEGORY) AS ID_CATEGORY FROM category;";
 
     @Override
     public List<Category> findAll() {
@@ -84,5 +87,48 @@ public class CategoryDao extends AbstractDao<Category> {
     @Override
     public boolean update(Category entity) {
         return false;
+    }
+
+    public boolean insert(List<Category> categories) {
+        boolean inserted = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CATEGORY)) {
+            connection.setAutoCommit(false);
+            for (Category category : categories) {
+                preparedStatement.setInt(1, category.getIdLocale());
+                preparedStatement.setString(2, category.getCategoryName());
+                preparedStatement.setInt(3, category.getId());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            connection.commit();
+            logger.info("Created new category record");
+            inserted = true;
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                logger.error("Errors occurred while rollback process." + e1.getMessage());
+            }
+            logger.error("New category was not inserted to db. " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return inserted;
+    }
+
+    public int getLastId(){
+        Integer id = null;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_LAST_CATEGORY_ID)) {
+            while (resultSet.next()) {
+                id = resultSet.getInt("ID_CATEGORY");
+            }
+        } catch (SQLException e) {
+            logger.error("Errors occurred while accessing the category table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return id;
     }
 }

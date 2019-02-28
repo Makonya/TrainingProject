@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class LocaleDao extends AbstractDao<Locale> {
@@ -15,7 +16,7 @@ public class LocaleDao extends AbstractDao<Locale> {
 
     @Override
     public List<Locale> findAll() {
-        List<Locale> locales = new ArrayList<>();
+        List<Locale> locales = new LinkedList<>();
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_LOCALES)) {
             while (resultSet.next()) {

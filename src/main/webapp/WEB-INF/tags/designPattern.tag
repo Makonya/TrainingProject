@@ -55,10 +55,14 @@
                             ${MProfile}
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/kz/myCourses">${MCourses}</a>
-                        <c:if test="${sessionScope.role eq 'admin'}">
-                            <a class="dropdown-item" href="/kz/addCategory">${MAddCategory}</a>
-                        </c:if>
+                        <c:choose>
+                            <c:when test="${sessionScope.role eq 'admin'}">
+                                <a class="dropdown-item" href="/kz/addCategory">${MAddCategory}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="dropdown-item" href="/kz/myCourses">${MCourses}</a>
+                            </c:otherwise>
+                        </c:choose>
                         <a class="dropdown-item" href="/kz/profile">${MEdit}</a>
                         <a class="dropdown-item" href="/kz/logout">${MLogout}</a>
                     </div>

@@ -76,6 +76,7 @@ public class AppConstant {
     public static final String EMAIL_VALIDATION = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
+    public static final String CATEGORY_NAME_VALIDATION = "^.{2,45}$";
 //    public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
     public static final String MARK_VALIDATION = "[2-5]{1}";
     public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
@@ -130,5 +131,9 @@ public class AppConstant {
     public static final String COURSE_CATEGORY_OPTION = "categoryOption";
 
     public static final String ATT_LOCALES = "locales";
-
+    public static final String CATEGORY_VAL_ERROR = "category_val_error";
+    public static final String INPUT_CATEGORY_NAME = "categoryInput";
+    public static final String CATEGORY_NAME = "categoryName";
+    public static final String CATEGORY_ADD_SUCCESS = "success_add_category";
+    public static final String CATEGORY_EXIST_ERROR = "category_exist_error";
 }
