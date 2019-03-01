@@ -19,6 +19,7 @@ public class AccessFilter implements Filter {
     private String student = "student";
 
     private final Set<String> guestAccess = new HashSet<>();
+    private final Set<String> commonAccess = new HashSet<>();
     private final Set<String> teacherAccess = new HashSet<>();
     private final Set<String> studentAccess = new HashSet<>();
     private final Set<String> adminAccess = new HashSet<>();
@@ -27,6 +28,7 @@ public class AccessFilter implements Filter {
     public void init(FilterConfig filterConfig) {
         LOGGER.info("Initializing access roles");
         initGuest();
+        initCommonAccess();
         initTeacher();
         initStudent();
         initAdmin();
@@ -78,12 +80,7 @@ public class AccessFilter implements Filter {
     }
 
     private void initTeacher() {
-        teacherAccess.add("/listOfCourses");
-        teacherAccess.add("/set-language");
-        teacherAccess.add("/changeCategory");
-        teacherAccess.add("/logout");
-        teacherAccess.add("/profile");
-        teacherAccess.add("/course");
+        teacherAccess.addAll(commonAccess);
         teacherAccess.add("/editCourse");
         teacherAccess.add("/addMarks");
         teacherAccess.add("/myCourses");
@@ -91,12 +88,7 @@ public class AccessFilter implements Filter {
     }
 
     private void initStudent() {
-        studentAccess.add("/listOfCourses");
-        studentAccess.add("/set-language");
-        studentAccess.add("/changeCategory");
-        studentAccess.add("/logout");
-        studentAccess.add("/profile");
-        studentAccess.add("/course");
+        studentAccess.addAll(commonAccess);
         studentAccess.add("/addCourse");
         studentAccess.add("/addComment");
         studentAccess.add("/deleteCourse");
@@ -104,13 +96,17 @@ public class AccessFilter implements Filter {
     }
 
     private void initAdmin() {
-        adminAccess.add("/listOfCourses");
-        adminAccess.add("/set-language");
-        adminAccess.add("/changeCategory");
-        adminAccess.add("/logout");
-        adminAccess.add("/profile");
-        adminAccess.add("/course");
+        adminAccess.addAll(commonAccess);
         adminAccess.add("/addCategory");
+    }
+
+    private void initCommonAccess() {
+        commonAccess.add("/listOfCourses");
+        commonAccess.add("/set-language");
+        commonAccess.add("/changeCategory");
+        commonAccess.add("/logout");
+        commonAccess.add("/profile");
+        commonAccess.add("/course");
     }
 
     @Override
