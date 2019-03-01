@@ -11,8 +11,8 @@ import static com.epam.training.util.AppConstant.*;
 public class View {
     private static final Logger logger = Logger.getLogger(View.class);
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
 
     public View(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;

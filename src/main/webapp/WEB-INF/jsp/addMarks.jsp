@@ -33,9 +33,9 @@
                    style="height: 30px;padding: 5px">${updateSuccess}</p>
             </c:if>
             <c:if test="${not empty insert_success}">
-            <p class="alert alert-success"
-               style="height: 30px;padding: 5px">${insertSuccess}</p>
-        </c:if>
+                <p class="alert alert-success"
+                   style="height: 30px;padding: 5px">${insertSuccess}</p>
+            </c:if>
             <form action="${course_url}" method="POST">
                 <table class="table table-hover">
                     <thead>

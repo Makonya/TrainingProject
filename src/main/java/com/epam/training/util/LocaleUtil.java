@@ -9,9 +9,9 @@ import static com.epam.training.util.AppConstant.DEFAULT_LANGUAGE;
 import static com.epam.training.util.AppConstant.LANG;
 
 public class LocaleUtil {
-    public static int getLocaleId(HttpServletRequest request){
+    public static int getLocaleId(HttpServletRequest request) {
         String language = CookieGetter.getCookieValue(request, LANG);
-        if(language == null){
+        if (language == null) {
             language = DEFAULT_LANGUAGE;
         }
         LocaleDao localeDao = new LocaleDao();

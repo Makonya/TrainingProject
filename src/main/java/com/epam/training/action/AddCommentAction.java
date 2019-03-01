@@ -3,17 +3,15 @@ package com.epam.training.action;
 import com.epam.training.dao.FeedbackDao;
 import com.epam.training.entity.Feedback;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Date;
 
 import static com.epam.training.util.AppConstant.*;
 
 public class AddCommentAction implements Action {
     @Override
-    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         String commentText = request.getParameter(ATT_COURSE_COMMENT_TEXT);
         String courseId = request.getParameter(ATT_COURSE_ID);
         Integer userId = (Integer) request.getSession().getAttribute(ATT_USER_ID);

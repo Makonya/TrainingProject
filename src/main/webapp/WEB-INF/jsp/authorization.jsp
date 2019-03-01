@@ -32,7 +32,8 @@
                 </div>
                 <div class="form-group">
                     <label for="password">${MPassword}:</label>
-                    <input type="password" class="form-control" id="password" placeholder="${MEnterPassword}" name="password">
+                    <input type="password" class="form-control" id="password" placeholder="${MEnterPassword}"
+                           name="password">
                 </div>
                 <button type="submit" class="btn btn-primary">${MSignIn}</button>
                 <a href="/kz/registration" class="btn btn-primary">${MRegistration}</a>

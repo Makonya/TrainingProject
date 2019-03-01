@@ -11,19 +11,19 @@ import com.epam.training.util.PropertyFileLoader;
 import org.apache.log4j.*;
 
 public class ConnectionPool {
-    public static final int DEFAULT_POOL_SIZE = 5;
+    private static final int DEFAULT_POOL_SIZE = 5;
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
 
     private static ConnectionPool connectionPool = ConnectionPool.init();
 
-    private BlockingQueue<Connection> connectionQueue;
+    private final BlockingQueue<Connection> CONNECTION_QUEUE;
 
     private ConnectionPool(String url, String user, String password, int poolSize) throws SQLException {
 
-        connectionQueue = new ArrayBlockingQueue<>(poolSize);
+        CONNECTION_QUEUE = new ArrayBlockingQueue<>(poolSize);
         for (int i = 0; i < poolSize; i++) {
             Connection connection = DriverManager.getConnection(url, user, password);
-            connectionQueue.offer(connection);
+            CONNECTION_QUEUE.offer(connection);
         }
     }
 
@@ -31,7 +31,7 @@ public class ConnectionPool {
         return connectionPool;
     }
 
-    public static ConnectionPool init() {
+    private static ConnectionPool init() {
         ConnectionPool instance = null;
         Properties properties = PropertyFileLoader.load("database.properties");
         String driver = properties.getProperty("db.driverClassName");
@@ -64,7 +64,7 @@ public class ConnectionPool {
     public Connection getConnection() {
         Connection connection = null;
         try {
-            connection = connectionQueue.take();
+            connection = CONNECTION_QUEUE.take();
         } catch (InterruptedException e) {
             logger.error("InterruptedException! It's impossible to take connection! " + e.getMessage());
         }
@@ -74,7 +74,7 @@ public class ConnectionPool {
     public void releaseConnection(Connection connection) {
         try {
             if (!connection.isClosed()) {
-                if (!connectionQueue.offer(connection)) {
+                if (!CONNECTION_QUEUE.offer(connection)) {
                     logger.info("Connection not added. Possible 'leakage' of connections!");
                 }
             } else {
@@ -87,7 +87,7 @@ public class ConnectionPool {
 
     private void clearConnectionQueue() throws SQLException {
         Connection connection;
-        while ((connection = connectionQueue.poll()) != null) {
+        while ((connection = CONNECTION_QUEUE.poll()) != null) {
             if (!connection.getAutoCommit()) {
                 connection.commit();
             }

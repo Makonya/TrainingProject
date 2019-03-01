@@ -17,6 +17,7 @@
     <fmt:message key="profile.safe" var="safe"/>
     <fmt:message key="main.page" var="mainPage"/>
     <fmt:message key="course.edit.success" var="courseEditSuccess"/>
+    <fmt:message key="main.back" var="back"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -44,7 +45,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDescription}</p>
                     </c:if>
-                    <textarea class="form-control" rows="5" id="description" name="description">${descriptionInput}</textarea>
+                    <textarea class="form-control" rows="5" id="description"
+                              name="description">${descriptionInput}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="startDate">${startDate}</label>
@@ -52,7 +54,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="startDate" name="startDate" value="${startDateInput}" data-mask="____-__-__">
+                    <input type="text" class="form-control" id="startDate" name="startDate" value="${startDateInput}"
+                           data-mask="____-__-__">
                 </div>
                 <div class="form-group">
                     <label for="endDate">${endDate}</label>
@@ -64,9 +67,11 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${errorStartEndDate}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="endDate" name="endDate" value="${endDateInput}"  data-mask="____-__-__">
+                    <input type="text" class="form-control" id="endDate" name="endDate" value="${endDateInput}"
+                           data-mask="____-__-__">
                 </div>
                 <button type="submit" class="btn btn-primary">${safe}</button>
+                <a href="/kz/course?courseID=${courseID}" class="btn btn-primary">${back}</a>
                 <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
             </form>
             <script>
@@ -80,12 +85,13 @@
                         function isDigit(char) {
                             return /\d/.test(char);
                         }
+
                         return maskedData.split('').filter(isDigit);
                     }
 
                     // Replace `_` characters with characters from `data`
                     function applyMask(data) {
-                        return mask.map(function(char) {
+                        return mask.map(function (char) {
                             if (char != '_') return char;
                             if (data.length == 0) return char;
                             return data.shift();

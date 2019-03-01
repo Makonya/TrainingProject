@@ -4,7 +4,7 @@ import com.epam.training.entity.BaseEntity;
 
 import java.util.List;
 
-public abstract class AbstractDao<T extends BaseEntity> {
+abstract class AbstractDao<T extends BaseEntity> {
     public abstract List<T> findAll();
 
     public abstract T findById(int id);

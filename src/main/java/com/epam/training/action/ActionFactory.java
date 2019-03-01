@@ -7,43 +7,43 @@ import java.util.Map;
 import static com.epam.training.util.AppConstant.*;
 
 public class ActionFactory {
-    private Map<String, Action> actionsMap = new HashMap<>();
+    private static final Map<String, Action> ACTIONS_MAP = new HashMap<>();
 
     public ActionFactory() {
         init();
     }
 
-    private void init(){
+    private void init() {
 
-        actionsMap.put("GET/welcome", new ShowPageAction(WELCOME));
-        actionsMap.put("GET/authorization", new ShowPageAction(AUTHORIZATION));
-        actionsMap.put("GET/registration", new ShowPageAction(REGISTER));
-        actionsMap.put("GET/set-language", new ChangeLanguageAction());
-        actionsMap.put("GET/changeCategory", new ChangeCategoryAction());
-        actionsMap.put("GET/listOfCourses", new ListOfCoursesAction());
-        actionsMap.put("GET/logout", new LogoutAction());
-        actionsMap.put("GET/profile", new ShowProfileAction());
-        actionsMap.put("GET/course", new ShowCourseAction());
-        actionsMap.put("GET/addComment", new AddCommentAction());
-        actionsMap.put("GET/addCourse", new AddCourseAction());
-        actionsMap.put("GET/deleteCourse", new DeleteCourseAction());
-        actionsMap.put("GET/myCourses", new ShowMyCoursesAction());
-        actionsMap.put("GET/editCourse", new EditCourseAction());
-        actionsMap.put("GET/addMarks", new AddMarksAction());
-        actionsMap.put("GET/addNewCourse", new AddNewCourse());
-        actionsMap.put("GET/addCategory", new AddCategoryAction());
+        ACTIONS_MAP.put("GET/welcome", new ShowPageAction(WELCOME));
+        ACTIONS_MAP.put("GET/authorization", new ShowPageAction(AUTHORIZATION));
+        ACTIONS_MAP.put("GET/registration", new ShowPageAction(REGISTER));
+        ACTIONS_MAP.put("GET/set-language", new ChangeLanguageAction());
+        ACTIONS_MAP.put("GET/changeCategory", new ChangeCategoryAction());
+        ACTIONS_MAP.put("GET/listOfCourses", new ListOfCoursesAction());
+        ACTIONS_MAP.put("GET/logout", new LogoutAction());
+        ACTIONS_MAP.put("GET/profile", new ShowProfileAction());
+        ACTIONS_MAP.put("GET/course", new ShowCourseAction());
+        ACTIONS_MAP.put("GET/addComment", new AddCommentAction());
+        ACTIONS_MAP.put("GET/addCourse", new AddCourseAction());
+        ACTIONS_MAP.put("GET/deleteCourse", new DeleteCourseAction());
+        ACTIONS_MAP.put("GET/myCourses", new ShowMyCoursesAction());
+        ACTIONS_MAP.put("GET/editCourse", new EditCourseAction());
+        ACTIONS_MAP.put("GET/addMarks", new AddMarksAction());
+        ACTIONS_MAP.put("GET/addNewCourse", new AddNewCourse());
+        ACTIONS_MAP.put("GET/addCategory", new AddCategoryAction());
 
-        actionsMap.put("POST/authorization", new LoginAction());
-        actionsMap.put("POST/registration", new RegisterAction());
-        actionsMap.put("POST/profile", new EditProfileDataAction());
-        actionsMap.put("POST/editCourse", new EditCourseAction());
-        actionsMap.put("POST/addMarks", new AddMarksAction());
-        actionsMap.put("POST/addNewCourse", new AddNewCourse());
-        actionsMap.put("POST/addCategory", new AddCategoryAction());
+        ACTIONS_MAP.put("POST/authorization", new LoginAction());
+        ACTIONS_MAP.put("POST/registration", new RegisterAction());
+        ACTIONS_MAP.put("POST/profile", new EditProfileDataAction());
+        ACTIONS_MAP.put("POST/editCourse", new EditCourseAction());
+        ACTIONS_MAP.put("POST/addMarks", new AddMarksAction());
+        ACTIONS_MAP.put("POST/addNewCourse", new AddNewCourse());
+        ACTIONS_MAP.put("POST/addCategory", new AddCategoryAction());
     }
 
-    public Action getAction(HttpServletRequest request){
+    public Action getAction(HttpServletRequest request) {
         System.out.println(request.getMethod() + request.getPathInfo());
-        return actionsMap.get(request.getMethod() + request.getPathInfo());
+        return ACTIONS_MAP.get(request.getMethod() + request.getPathInfo());
     }
 }

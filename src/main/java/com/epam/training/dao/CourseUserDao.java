@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseUserDao extends AbstractDao<CourseUser> {
-    private static Logger logger = Logger.getLogger(CourseUser.class);
+    private static final Logger LOGGER = Logger.getLogger(CourseUser.class);
     private static final String SQL_SELECT_COURSE_USER_BY_USER_COURSE_ID = "SELECT * FROM COURSE_USER WHERE ID_USER=? AND ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_USER_BY_USER_ID = "SELECT * FROM COURSE_USER c_u " +
             "LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER " +
@@ -42,7 +42,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the course_user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -61,7 +61,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the course_user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -86,7 +86,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the course_user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -111,9 +111,9 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
             preparedStatement.setInt(2, entity.getIdCourse());
             preparedStatement.execute();
             deleted = true;
-            logger.info("Record from course_user was deleted.");
+            LOGGER.info("Record from course_user was deleted.");
         } catch (SQLException e) {
-            logger.error("Record from course_user wasn't deleted. " + e);
+            LOGGER.error("Record from course_user wasn't deleted. " + e);
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -133,10 +133,10 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
             preparedStatement.setInt(1, courseUser.getIdUser());
             preparedStatement.setInt(2, courseUser.getIdCourse());
             preparedStatement.executeUpdate();
-            logger.info("Created new course user record");
+            LOGGER.info("Created new course user record");
             inserted = true;
         } catch (SQLException e) {
-            logger.error("New course user record wasn't inserted to db. " + e.getMessage());
+            LOGGER.error("New course user record wasn't inserted to db. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

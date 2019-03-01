@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao extends AbstractDao<Course> {
-    private static Logger logger = Logger.getLogger(CourseDao.class);
+    private static final Logger LOGGER = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_BY_USER_ID = "SELECT * FROM COURSE where ID_USER=?";
@@ -26,7 +26,7 @@ public class CourseDao extends AbstractDao<Course> {
                 users.add(getCourseParameters(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the course table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -46,7 +46,7 @@ public class CourseDao extends AbstractDao<Course> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -135,7 +135,7 @@ public class CourseDao extends AbstractDao<Course> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the course table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the course table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

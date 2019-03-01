@@ -7,10 +7,8 @@ import com.epam.training.entity.Course;
 import com.epam.training.util.LocaleUtil;
 import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,9 +18,8 @@ import static com.epam.training.util.AppConstant.*;
 import static com.epam.training.util.Validation.checkParamValid;
 
 public class AddNewCourse implements Action {
-    private static Logger logger = Logger.getLogger(EditCourseAction.class);
+    private static final Logger LOGGER = Logger.getLogger(EditCourseAction.class);
     private int userId;
-    private int categoryId;
     private String category;
     private String courseName;
     private String courseDescription;
@@ -32,7 +29,7 @@ public class AddNewCourse implements Action {
     private int localId;
 
     @Override
-    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         localId = LocaleUtil.getLocaleId(request);
         switch (request.getMethod()) {
             case METHOD_POST:
@@ -45,7 +42,7 @@ public class AddNewCourse implements Action {
                     if (courseDao.insert(course)) {
                         return new ActionResult(COURSES, true);
                     } else {
-                        logger.warn("New course wasn't inserted!");
+                        LOGGER.warn("New course wasn't inserted!");
                     }
                 } else {
                     correctness = 0;
@@ -59,7 +56,7 @@ public class AddNewCourse implements Action {
         return new ActionResult(ADD_COURSE);
     }
 
-    private void setCategories(HttpServletRequest request){
+    private void setCategories(HttpServletRequest request) {
         CategoryDao categoryDao = new CategoryDao();
         List<Category> categories = categoryDao.findAllByIdLocale(localId);
         request.setAttribute(ATT_CATEGORIES, categories);
@@ -89,7 +86,7 @@ public class AddNewCourse implements Action {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return new java.sql.Date(parsed.getTime());
+        return new java.sql.Date(parsed != null ? parsed.getTime() : 0);
     }
 
     private void parametersValidation(HttpServletRequest request) {

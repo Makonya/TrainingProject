@@ -16,7 +16,7 @@ public class UserDao extends AbstractDao<User> {
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM USER WHERE ID=?";
     private static final String SQL_INSERT_USER = "INSERT INTO USER(ID_USER,LOGIN,PASSWORD,NAME,SURNAME,EMAIL,ID_ROLE) VALUES(ID_USER, ?,?,?,?,?,?)";
     private static final String SQL_UPDATE_USER = "UPDATE USER SET LOGIN = ?, PASSWORD = ?, NAME = ?, SURNAME = ?, EMAIL = ?, ID_ROLE = ? WHERE ID_USER = ?";
-    private static Logger logger = Logger.getLogger(UserDao.class);
+    private static final Logger LOGGER = Logger.getLogger(UserDao.class);
 
     @Override
     public List<User> findAll() {
@@ -27,7 +27,7 @@ public class UserDao extends AbstractDao<User> {
                 users.add(getUserParameters(resultSet));
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -46,7 +46,7 @@ public class UserDao extends AbstractDao<User> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -64,7 +64,7 @@ public class UserDao extends AbstractDao<User> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -79,9 +79,9 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.execute();
             deleted = true;
-            logger.info("User was deleted. USer ID = " + entity.getId());
+            LOGGER.info("User was deleted. USer ID = " + entity.getId());
         } catch (SQLException e) {
-            logger.error("User wasn't deleted. " + e);
+            LOGGER.error("User wasn't deleted. " + e);
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -96,9 +96,9 @@ public class UserDao extends AbstractDao<User> {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             deleted = true;
-            logger.info("User was deleted. USer ID = " + id);
+            LOGGER.info("User was deleted. USer ID = " + id);
         } catch (SQLException e) {
-            logger.error("User wasn't deleted. " + e);
+            LOGGER.error("User wasn't deleted. " + e);
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -115,10 +115,10 @@ public class UserDao extends AbstractDao<User> {
                 resultSet.next();
                 entity.setId(resultSet.getInt(1));
             }
-            logger.info("Created new user where id = " + entity.getId());
+            LOGGER.info("Created new user where id = " + entity.getId());
             inserted = true;
         } catch (SQLException e) {
-            logger.error("New user wasn't inserted to db. " + e.getMessage());
+            LOGGER.error("New user wasn't inserted to db. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -153,7 +153,7 @@ public class UserDao extends AbstractDao<User> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

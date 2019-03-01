@@ -4,10 +4,8 @@ import com.epam.training.dao.CourseDao;
 import com.epam.training.entity.Course;
 import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +14,7 @@ import static com.epam.training.util.AppConstant.*;
 import static com.epam.training.util.Validation.checkParamValid;
 
 public class EditCourseAction implements Action {
-    private static Logger logger = Logger.getLogger(EditCourseAction.class);
+    private static final Logger LOGGER = Logger.getLogger(EditCourseAction.class);
     private int courseId;
     private String courseName;
     private String courseDescription;
@@ -25,23 +23,23 @@ public class EditCourseAction implements Action {
     private int correctness = 0;
 
     @Override
-    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));
         CourseDao courseDao = new CourseDao();
 
-        switch (request.getMethod()){
+        switch (request.getMethod()) {
             case METHOD_POST:
                 getParameters(request);
                 parametersValidation(request);
-                if(correctness == 0){
+                if (correctness == 0) {
                     Course course = fillValidatedParameters();
-                    if(courseDao.update(course)){
+                    if (courseDao.update(course)) {
                         request.setAttribute(COURSE_EDIT_SUCCESS, true);
                         setAttributes(request, course);
                     } else {
-                        logger.warn("Course data wasn't updated!");
+                        LOGGER.warn("Course data wasn't updated!");
                     }
-                } else{
+                } else {
                     correctness = 0;
                     setEditedAttributes(request);
                 }
@@ -54,7 +52,7 @@ public class EditCourseAction implements Action {
         return new ActionResult(EDIT_COURSE);
     }
 
-    private void setAttributes(HttpServletRequest request, Course course){
+    private void setAttributes(HttpServletRequest request, Course course) {
         request.setAttribute(INPUT_COURSE_NAME, course.getCourseName());
         request.setAttribute(INPUT_COURSE_DESCRIPTION, course.getDescription());
         request.setAttribute(INPUT_COURSE_DATE_START, course.getStartDate());
@@ -62,7 +60,7 @@ public class EditCourseAction implements Action {
         request.setAttribute(ATT_COURSE_ID, course.getId());
     }
 
-    private void setEditedAttributes(HttpServletRequest request){
+    private void setEditedAttributes(HttpServletRequest request) {
         request.setAttribute(INPUT_COURSE_NAME, courseName);
         request.setAttribute(INPUT_COURSE_DESCRIPTION, courseDescription);
         request.setAttribute(INPUT_COURSE_DATE_START, startDate);
@@ -70,14 +68,14 @@ public class EditCourseAction implements Action {
         request.setAttribute(ATT_COURSE_ID, courseId);
     }
 
-    private void getParameters(HttpServletRequest request){
+    private void getParameters(HttpServletRequest request) {
         courseName = request.getParameter(COURSE_NAME);
         courseDescription = request.getParameter(DESCRIPTION);
         startDate = request.getParameter(COURSE_START_DATE);
         endDate = request.getParameter(COURSE_END_DATE);
     }
 
-    private Date parseDate(String date){
+    private Date parseDate(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = null;
         try {
@@ -85,23 +83,24 @@ public class EditCourseAction implements Action {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return new java.sql.Date(parsed.getTime());
+        return new java.sql.Date(parsed != null ? parsed.getTime() : 0);
     }
 
-    private void parametersValidation(HttpServletRequest request){
-        if(!checkParamValid(COURSE_NAME_VAL_ERROR, courseName, COURSE_NAME_VALIDATION, request)) correctness++;
-        if(!checkParamValid(COURSE_DESCRIPTION_VAL_ERROR, courseDescription, DESCRIPTION_VALIDATION, request)) correctness++;
-        if(!checkParamValid(COURSE_START_DATE_VAL_ERROR, startDate, DATE_VALIDATION, request)) correctness++;
-        if(!checkParamValid(COURSE_END_DATE_VAL_ERROR, endDate, DATE_VALIDATION, request)) correctness++;
-        if(correctness == 0){
-            if(parseDate(endDate).before(parseDate(startDate))){
+    private void parametersValidation(HttpServletRequest request) {
+        if (!checkParamValid(COURSE_NAME_VAL_ERROR, courseName, COURSE_NAME_VALIDATION, request)) correctness++;
+        if (!checkParamValid(COURSE_DESCRIPTION_VAL_ERROR, courseDescription, DESCRIPTION_VALIDATION, request))
+            correctness++;
+        if (!checkParamValid(COURSE_START_DATE_VAL_ERROR, startDate, DATE_VALIDATION, request)) correctness++;
+        if (!checkParamValid(COURSE_END_DATE_VAL_ERROR, endDate, DATE_VALIDATION, request)) correctness++;
+        if (correctness == 0) {
+            if (parseDate(endDate).before(parseDate(startDate))) {
                 request.setAttribute(COURSE_START_END_DATE_VAL_ERROR, true);
                 correctness++;
             }
         }
     }
 
-    private Course fillValidatedParameters(){
+    private Course fillValidatedParameters() {
         Course course = new Course();
         course.setId(courseId);
         course.setCourseName(courseName);

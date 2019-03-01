@@ -5,12 +5,11 @@ import com.epam.training.entity.Locale;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class LocaleDao extends AbstractDao<Locale> {
-    private static Logger logger = Logger.getLogger(LocaleDao.class);
+    private static final Logger LOGGER = Logger.getLogger(LocaleDao.class);
     private static final String SQL_SELECT_LOCALE_BY_NAME = "SELECT * FROM LOCALE WHERE LOCALE_NAME=?";
     private static final String SQL_SELECT_ALL_LOCALES = "SELECT * FROM LOCALE";
 
@@ -26,7 +25,7 @@ public class LocaleDao extends AbstractDao<Locale> {
                 locales.add(locale);
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -71,7 +70,7 @@ public class LocaleDao extends AbstractDao<Locale> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

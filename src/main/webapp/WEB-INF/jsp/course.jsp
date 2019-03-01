@@ -65,7 +65,9 @@
                     <a href="/kz/addMarks?courseID=${courseID}" class="btn btn-primary">${courseAddMarks}</a>
                 </c:if>
             </c:if>
-            <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br/><br/>
+            <c:if test="${sessionScope.role != 'admin'}">
+                <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br/><br/>
+            </c:if>
             <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a><br/><br/>
             <c:if test="${not empty feedback}">
                 <div class="jumbotron">

@@ -3,10 +3,11 @@ package com.epam.training.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import org.apache.log4j.*;
 
 public class Encryption {
-    private static Logger logger = Logger.getLogger(Encryption.class);
+    private static final Logger LOGGER = Logger.getLogger(Encryption.class);
 
     public static String toEncrypt(String st) {
         MessageDigest messageDigest;
@@ -18,16 +19,16 @@ public class Encryption {
             messageDigest.update(st.getBytes());
             digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
-            logger.warn("It's impossible to use MD5. " + e);
+            LOGGER.warn("It's impossible to use MD5. " + e);
         }
 
         BigInteger bigInt = new BigInteger(1, digest);
-        String md5Hex = bigInt.toString(16);
+        StringBuilder md5Hex = new StringBuilder(bigInt.toString(16));
 
-        while( md5Hex.length() < 32 ){
-            md5Hex = "0" + md5Hex;
+        while (md5Hex.length() < 32) {
+            md5Hex.insert(0, "0");
         }
 
-        return md5Hex;
+        return md5Hex.toString();
     }
 }

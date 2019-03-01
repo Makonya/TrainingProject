@@ -6,10 +6,8 @@ import com.epam.training.dao.MarkDao;
 import com.epam.training.entity.CourseUser;
 import com.epam.training.entity.Mark;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import static com.epam.training.util.AppConstant.*;
 
 public class AddMarksAction implements Action {
     @Override
-    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));
         CourseUserDao courseUserDao = new CourseUserDao();
         List<CourseUser> courseUsers = courseUserDao.findByCourseId(courseId);
@@ -35,7 +33,7 @@ public class AddMarksAction implements Action {
                     mark.setIdCourse(courseId);
                     mark.setTotal(total);
                     if (markDao.findByCourseUserId(mark)) {
-                        if (courseUsers.get(i-1).getTempMark() != mark.getTotal()){
+                        if (courseUsers.get(i - 1).getTempMark() != mark.getTotal()) {
                             marksToUpdate.add(mark);
                         }
                     } else {
@@ -43,14 +41,14 @@ public class AddMarksAction implements Action {
                     }
                 }
             }
-            if (marksToInsert.isEmpty() && marksToUpdate.isEmpty()){
-                if(markDao.insert(marksToInsert)) request.setAttribute(MARKS_NO_CHANGES, true);
+            if (marksToInsert.isEmpty() && marksToUpdate.isEmpty()) {
+                if (markDao.insert(marksToInsert)) request.setAttribute(MARKS_NO_CHANGES, true);
             } else {
                 if (!marksToInsert.isEmpty()) {
-                    if(markDao.insert(marksToInsert)) request.setAttribute(MARKS_INSERT_SUCCESS, true);
+                    if (markDao.insert(marksToInsert)) request.setAttribute(MARKS_INSERT_SUCCESS, true);
                 }
-                if(!marksToUpdate.isEmpty()){
-                    if(markDao.update(marksToUpdate)) request.setAttribute(MARKS_UPDATE_SUCCESS, true);
+                if (!marksToUpdate.isEmpty()) {
+                    if (markDao.update(marksToUpdate)) request.setAttribute(MARKS_UPDATE_SUCCESS, true);
                 }
             }
             courseUsers = courseUserDao.findByCourseId(courseId);

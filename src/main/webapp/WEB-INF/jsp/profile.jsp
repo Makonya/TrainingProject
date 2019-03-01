@@ -29,6 +29,7 @@
     <fmt:message key="profile.capture" var="capture"/>
     <fmt:message key="profile.safe" var="safe"/>
     <fmt:message key="main.page" var="mainPage"/>
+    <fmt:message key="profile.role" var="role"/>
 </fmt:bundle>
 
 <my:designPattern role="guest">
@@ -36,6 +37,8 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <h2>${capture}</h2>
+            <p class="alert alert-primary"
+               style="height: 30px;padding: 5px">${role}: ${sessionScope.role}</p>
             <c:if test="${not empty edit_success}">
                 <p class="alert alert-success"
                    style="height: 30px;padding: 5px">${profile_edit_success}</p>
@@ -43,7 +46,8 @@
             <form action="${profile_url}" method="POST">
                 <div class="form-group">
                     <label for="login">${login}:</label>
-                    <input type="text" class="form-control" id="login" placeholder="${enterLogin}" name="login" disabled value="${loginInput}">
+                    <input type="text" class="form-control" id="login" placeholder="${enterLogin}" name="login" disabled
+                           value="${loginInput}">
                 </div>
                 <div class="form-group">
                     <label for="password">${password}:</label>
@@ -69,7 +73,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${name_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="name" placeholder="${enterName}" name="name" value="${nameInput}">
+                    <input type="text" class="form-control" id="name" placeholder="${enterName}" name="name"
+                           value="${nameInput}">
                 </div>
                 <div class="form-group">
                     <label for="surname">${surname}:</label>
@@ -77,7 +82,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${surname_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="surname" placeholder="${enterSurname}" name="surname" value="${surnameInput}">
+                    <input type="text" class="form-control" id="surname" placeholder="${enterSurname}" name="surname"
+                           value="${surnameInput}">
                 </div>
                 <div class="form-group">
                     <label for="email">${email}:</label>
@@ -85,7 +91,8 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${email_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="email" placeholder="${enterEmail}" name="email" value="${emailInput}">
+                    <input type="text" class="form-control" id="email" placeholder="${enterEmail}" name="email"
+                           value="${emailInput}">
                 </div>
                 <button type="submit" class="btn btn-primary">${safe}</button>
                 <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>

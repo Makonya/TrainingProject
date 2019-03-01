@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedbackDao extends AbstractDao<Feedback> {
-    private static Logger logger = Logger.getLogger(FeedbackDao.class);
+    private static final Logger LOGGER = Logger.getLogger(FeedbackDao.class);
     private static final String SQL_SELECT_FEEDBACK_BY_COURSE_ID = "SELECT * FROM FEEDBACK f LEFT JOIN USER u ON f.ID_USER = u.ID_USER WHERE f.ID_COURSE=?";
     private static final String SQL_SELECT_FEEDBACK_BY_COURSE_USER_ID = "SELECT * FROM FEEDBACK WHERE ID_COURSE=? AND ID_USER=?";
     private static final String SQL_INSERT_FEEDBACK = "INSERT INTO FEEDBACK(INFO, FEEDBACK_DATE, ID_COURSE, ID_USER) VALUES(?,?,?,?)";
@@ -40,10 +40,10 @@ public class FeedbackDao extends AbstractDao<Feedback> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK)) {
             setFeedbackParameters(preparedStatement, comment).executeUpdate();
-            logger.info("Inserted new feedback comment");
+            LOGGER.info("Inserted new feedback comment");
             inserted = true;
         } catch (SQLException e) {
-            logger.error("New feedback comment wasn't inserted to db. " + e.getMessage());
+            LOGGER.error("New feedback comment wasn't inserted to db. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -67,7 +67,7 @@ public class FeedbackDao extends AbstractDao<Feedback> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -86,7 +86,7 @@ public class FeedbackDao extends AbstractDao<Feedback> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

@@ -1,6 +1,5 @@
 package com.epam.training.dao;
 
-import com.epam.training.entity.Mark;
 import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.Category;
 import org.apache.log4j.Logger;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDao extends AbstractDao<Category> {
-    private static Logger logger = Logger.getLogger(CategoryDao.class);
+    private static final Logger LOGGER = Logger.getLogger(CategoryDao.class);
     private static final String SQL_SELECT_CATEGORY_BY_LOCALE_ID = "SELECT * FROM CATEGORY WHERE ID_LOCALE=?";
     private static final String SQL_SELECT_CATEGORY_BY_NAME = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME=?";
     private static final String SQL_INSERT_CATEGORY = "INSERT INTO CATEGORY(ID_LOCALE, CATEGORY_NAME, ID_CATEGORY) VALUES(?, ?, ?)";
@@ -41,7 +40,7 @@ public class CategoryDao extends AbstractDao<Category> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the category table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the category table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -62,7 +61,7 @@ public class CategoryDao extends AbstractDao<Category> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the category table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the category table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -102,15 +101,15 @@ public class CategoryDao extends AbstractDao<Category> {
             }
             preparedStatement.executeBatch();
             connection.commit();
-            logger.info("Created new category record");
+            LOGGER.info("Created new category record");
             inserted = true;
         } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException e1) {
-                logger.error("Errors occurred while rollback process." + e1.getMessage());
+                LOGGER.error("Errors occurred while rollback process." + e1.getMessage());
             }
-            logger.error("New category was not inserted to db. " + e.getMessage());
+            LOGGER.error("New category was not inserted to db. " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -118,14 +117,14 @@ public class CategoryDao extends AbstractDao<Category> {
     }
 
     public int getLastId(){
-        Integer id = null;
+        int id = 0;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_LAST_CATEGORY_ID)) {
             while (resultSet.next()) {
                 id = resultSet.getInt("ID_CATEGORY");
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the category table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the category table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

@@ -5,24 +5,24 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:bundle basename="i18n">
-  <fmt:message key="welcome.string.first" var="MFString"/>
-  <fmt:message key="welcome.string.second" var="MSString"/>
-  <fmt:message key="welcome.authorization" var="MAuthorization"/>
-  <fmt:message key="welcome.registration" var="MRegistration"/>
+    <fmt:message key="welcome.string.first" var="MFString"/>
+    <fmt:message key="welcome.string.second" var="MSString"/>
+    <fmt:message key="welcome.authorization" var="MAuthorization"/>
+    <fmt:message key="welcome.registration" var="MRegistration"/>
 </fmt:bundle>
 
 <my:designPattern role="guest">
 
-  <div class="row py-5 align-items-center">
-    <div class="col-md-12">
+    <div class="row py-5 align-items-center">
+        <div class="col-md-12">
 
-      <p class="display-3 text-center">${MFString}</p>
-      <p class="display-4 text-center">${MSString}</p>
-      <p class="text-center">
-        <a href="/kz/authorization" class="btn btn-primary">${MAuthorization}</a>
-        <a href="/kz/registration" class="btn btn-primary">${MRegistration}</a>
-      </p>
+            <p class="display-3 text-center">${MFString}</p>
+            <p class="display-4 text-center">${MSString}</p>
+            <p class="text-center">
+                <a href="/kz/authorization" class="btn btn-primary">${MAuthorization}</a>
+                <a href="/kz/registration" class="btn btn-primary">${MRegistration}</a>
+            </p>
+        </div>
     </div>
-  </div>
 
 </my:designPattern>

@@ -13,7 +13,7 @@ public class RoleDao extends AbstractDao<Role> {
     private static final String SQL_SELECT_ROLE_BY_ID = "SELECT * FROM ROLE WHERE ID_ROLE=?";
     private static final String SQL_SELECT_ROLE_BY_NAME = "SELECT * FROM ROLE WHERE NAME=?";
     private static final String SQL_INSERT_ROLE = "INSERT INTO ROLE VALUES(ID_ROLE, ?)";
-    private Logger logger = Logger.getLogger(RoleDao.class);
+    private static final Logger LOGGER = Logger.getLogger(RoleDao.class);
 
     @Override
     public List<Role> findAll() {
@@ -27,7 +27,7 @@ public class RoleDao extends AbstractDao<Role> {
                 roles.add(role);
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the role table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the role table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -46,7 +46,7 @@ public class RoleDao extends AbstractDao<Role> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
@@ -74,10 +74,10 @@ public class RoleDao extends AbstractDao<Role> {
                 resultSet.next();
                 entity.setId(resultSet.getInt(1));
             }
-            logger.info("Created new role where id = " + entity.getId());
+            LOGGER.info("Created new role where id = " + entity.getId());
             inserted = true;
         } catch (SQLException e) {
-            logger.error("New role wasn't inserted to db. " + e);
+            LOGGER.error("New role wasn't inserted to db. " + e);
             e.printStackTrace();
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
@@ -101,7 +101,7 @@ public class RoleDao extends AbstractDao<Role> {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Errors occurred while accessing the user table! " + e.getMessage());
+            LOGGER.error("Errors occurred while accessing the user table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }

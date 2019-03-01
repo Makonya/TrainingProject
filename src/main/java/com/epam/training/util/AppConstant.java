@@ -1,26 +1,28 @@
 package com.epam.training.util;
 
 public class AppConstant {
+    //Directories
     public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
-    public static final String IMAGES_DIRECTORY = "src//main//webapp//images//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
     //Name of pages for redirect
-    public static final String COURSES =             "listOfCourses";
-    public static final String WELCOME =             "welcome";
-    public static final String AUTHORIZATION =             "authorization";
-    public static final String REGISTER =             "registration";
-    public static final String LIST_OF_COURSES =             "listOfCourses";
-    public static final String PROFILE =             "profile";
-    public static final String COURSE =             "course";
-    public static final String MY_COURSES =             "myCourses";
-    public static final String EDIT_COURSE =             "editCourse";
-    public static final String ADD_MARKS =             "addMarks";
-    public static final String ADD_COURSE =             "addCourse";
-    public static final String ADD_CATEGORY =             "addCategory";
+    public static final String COURSES = "listOfCourses";
+    public static final String WELCOME = "welcome";
+    public static final String AUTHORIZATION = "authorization";
+    public static final String REGISTER = "registration";
+    public static final String LIST_OF_COURSES = "listOfCourses";
+    public static final String PROFILE = "profile";
+    public static final String COURSE = "course";
+    public static final String MY_COURSES = "myCourses";
+    public static final String EDIT_COURSE = "editCourse";
+    public static final String ADD_MARKS = "addMarks";
+    public static final String ADD_COURSE = "addCourse";
+    public static final String ADD_CATEGORY = "addCategory";
 
+    //Locale
     public static final String DEFAULT_LANGUAGE = "ru";
 
+    //Request method
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
 
@@ -28,17 +30,17 @@ public class AppConstant {
     public static final String PATH_TO_JSP = "/WEB-INF/jsp/";
     public static final String JSP_FORMAT = ".jsp";
 
-    //SelectLanguageAction
-    public static final String LANG =               "lang";
-    public static final String REFERER =            "referer";
+    //Select Language Action
+    public static final String LANG = "lang";
+    public static final String REFERER = "referer";
     public static final String CHARACTER_ENCODING = "UTF-8";
     public static final int HOUR = 24;
     public static final int MINUTE = 60;
     public static final int SEC = 60;
 
     //Login
-    public static final String LOGIN =                "login";
-    public static final String PASSWORD =             "password";
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
     public static final String LOGIN_ERROR = "login_error";
 
     //Register
@@ -54,15 +56,15 @@ public class AppConstant {
     public static final String SURNAME_VAL_ERROR = "surname_val_error";
     public static final String EMAIL_VAL_ERROR = "email_val_error";
 
-    //ListOfCourses
+    //List of courses
     public static final String ATT_CATEGORIES = "categories";
     public static final String ATT_COURSES = "courses";
     public static final String ATT_CATEGORY_ID = "categoryID";
 
     //Session
     public static final String ATT_USER_ID = "userId";
-    public static final String ATT_ROLE =        "role";
-    public static final String ATT_ROLE_ID =     "role_id";
+    public static final String ATT_ROLE = "role";
+    public static final String ATT_ROLE_ID = "role_id";
 
     //Roles
     public static final String STUDENT_ROLE = "student";
@@ -77,8 +79,6 @@ public class AppConstant {
     public static final String DESCRIPTION_VALIDATION = "^.{10,1000}$";
     public static final String COURSE_NAME_VALIDATION = "^.{2,140}$";
     public static final String CATEGORY_NAME_VALIDATION = "^.{2,45}$";
-//    public static final String DATE_VALIDATION = "\\d{4}-[01]\\d-[0-3]\\d";
-    public static final String MARK_VALIDATION = "[2-5]{1}";
     public static final String DATE_VALIDATION = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
 
     //Profile
@@ -103,8 +103,10 @@ public class AppConstant {
     public static final String ATT_COURSE_COMMENT_TEXT = "myComment";
     public static final String ATT_COURSE_DELETE_COMMENT = "student_delete_course";
 
+    //My courses
     public static final String ATT_MY_COURSES = "courseUsers";
 
+    //Edit course
     public static final String INPUT_COURSE_NAME = "nameInput";
     public static final String INPUT_COURSE_DESCRIPTION = "descriptionInput";
     public static final String INPUT_COURSE_DATE_START = "startDateInput";
@@ -128,11 +130,10 @@ public class AppConstant {
     public static final String MARKS_INSERT_SUCCESS = "insert_success";
     public static final String MARKS_NO_CHANGES = "no_changes";
     public static final String COURSE_CATEGORY = "category";
-    public static final String COURSE_CATEGORY_OPTION = "categoryOption";
 
+    //Add category
     public static final String ATT_LOCALES = "locales";
     public static final String CATEGORY_VAL_ERROR = "category_val_error";
-    public static final String INPUT_CATEGORY_NAME = "categoryInput";
     public static final String CATEGORY_NAME = "categoryName";
     public static final String CATEGORY_ADD_SUCCESS = "success_add_category";
     public static final String CATEGORY_EXIST_ERROR = "category_exist_error";

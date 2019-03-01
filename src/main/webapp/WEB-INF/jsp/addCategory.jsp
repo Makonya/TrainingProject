@@ -11,6 +11,7 @@
     <fmt:message key="category.add.error.name" var="errorCategory"/>
     <fmt:message key="category.add.exist.name" var="existCategory"/>
     <fmt:message key="category.add.success" var="successCategory"/>
+    <fmt:message key="main.page" var="mainPage"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -34,7 +35,7 @@
             <form action="/kz/addCategory" method="POST">
                 <c:forEach items="${locales}" var="locale" varStatus="localeLoopCount">
                     <div class="form-group">
-                        <label for="categoryName${localeLoopCount}">${locale.localeName}${localeLoopCount.count}:</label>
+                        <label for="categoryName${localeLoopCount}">${locale.localeName}:</label>
 
                         <input type="text" class="form-control" id="categoryName${localeLoopCount.count}"
                                placeholder="${enterCategoryName}"
@@ -42,6 +43,7 @@
                     </div>
                 </c:forEach>
                 <button type="submit" class="btn btn-primary">${safe}</button>
+                <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a><br/><br/>
             </form>
         </div>
         <div class="col-md-2 col-12"></div>

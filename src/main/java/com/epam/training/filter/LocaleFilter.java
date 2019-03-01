@@ -11,11 +11,10 @@ import java.io.IOException;
 import java.util.Locale;
 
 import static com.epam.training.util.AppConstant.*;
-import static com.epam.training.util.AppConstant.SEC;
 
 public class LocaleFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
