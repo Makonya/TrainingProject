@@ -28,8 +28,6 @@ public class ControllerServlet extends javax.servlet.http.HttpServlet {
         ActionResult actionResult = action.execute(req, resp);
         View view = new View(req, resp);
         view.navigate(actionResult);
-
-
     }
 
     @Override

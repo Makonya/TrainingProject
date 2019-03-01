@@ -1,8 +1,6 @@
 package com.epam.training.action;
 
-import com.epam.training.dao.CourseUserDao;
 import com.epam.training.entity.CourseUser;
-import com.epam.training.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 

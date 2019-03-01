@@ -54,7 +54,6 @@ public class RegisterAction implements Action {
         }
     }
 
-    //TODO delete duplicate code
     private void setParameters(HttpServletRequest request) {
         login = request.getParameter(LOGIN);
         password = request.getParameter(PASSWORD);

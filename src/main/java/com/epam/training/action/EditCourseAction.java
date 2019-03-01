@@ -60,7 +60,6 @@ public class EditCourseAction implements Action {
         request.setAttribute(ATT_COURSE_ID, course.getId());
     }
 
-    //TODO delete duplicate code
     private void setEditedAttributes(HttpServletRequest request) {
         request.setAttribute(INPUT_COURSE_NAME, courseName);
         request.setAttribute(INPUT_COURSE_DESCRIPTION, courseDescription);

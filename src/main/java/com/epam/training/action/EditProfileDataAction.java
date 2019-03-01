@@ -19,7 +19,6 @@ public class EditProfileDataAction implements Action {
     private String email;
     private int correctness = 0;
 
-    //TODO delete duplicate code
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int userId = (int) request.getSession().getAttribute(ATT_USER_ID);

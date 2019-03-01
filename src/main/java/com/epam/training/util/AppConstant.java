@@ -2,7 +2,7 @@ package com.epam.training.util;
 
 public class AppConstant {
     //Directories
-    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
+    public static final String DIRECTORY = "C://Users//k_mak//IdeaProjects//TrainingProject//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
     //Name of pages for redirect

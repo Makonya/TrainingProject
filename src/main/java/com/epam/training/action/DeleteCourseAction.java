@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static com.epam.training.action.CourseUserService.getCurrentUserCourse;
-import static com.epam.training.util.AppConstant.ATT_COURSE_ID;
-import static com.epam.training.util.AppConstant.ATT_USER_ID;
 import static com.epam.training.util.AppConstant.REFERER;
 
 public class DeleteCourseAction implements Action {

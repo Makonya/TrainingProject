@@ -19,7 +19,6 @@ public class ShowProfileAction implements Action {
         return new ActionResult(PROFILE);
     }
 
-    //TODO delete duplicate code
     private void setProfileValues(HttpServletRequest request, User user) {
         request.setAttribute(INPUT_LOGIN, user.getLogin());
         request.setAttribute(INPUT_NAME, user.getName());
