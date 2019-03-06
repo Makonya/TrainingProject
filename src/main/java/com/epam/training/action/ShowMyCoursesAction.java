@@ -7,6 +7,7 @@ import com.epam.training.entity.CourseUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 import static com.epam.training.util.AppConstant.*;
@@ -26,6 +27,7 @@ public class ShowMyCoursesAction implements Action {
                 CourseDao courseDao = new CourseDao();
                 List<Course> userCourses = courseDao.findByUserId(userId);
                 request.setAttribute(ATT_MY_COURSES, userCourses);
+                request.setAttribute(CURRENT_DATE, new Date());
                 break;
         }
         return new ActionResult(MY_COURSES);

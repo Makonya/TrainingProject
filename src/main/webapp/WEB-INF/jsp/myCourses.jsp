@@ -33,6 +33,9 @@
                     <c:if test="${sessionScope.role eq 'student'}">
                         <th>${courseMark}</th>
                     </c:if>
+                    <c:if test="${sessionScope.role eq 'teacher'}">
+                        <th>${addMarks}</th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,6 +55,11 @@
                                    class="card-link">${courseUser.courseName}</a></td>
                             <td>${courseUser.startDate}</td>
                             <td>${courseUser.endDate}</td>
+                            <td>
+                                <c:if test="${(courseUser.endDate) <= currentDate}">
+                                    <a href="/kz/addMarks?courseID=${courseUser.id}" class="btn btn-primary">${courseAddMarks}</a>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:if>
                 </c:forEach>

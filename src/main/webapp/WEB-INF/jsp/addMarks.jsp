@@ -13,10 +13,11 @@
     <fmt:message key="profile.safe" var="safe"/>
     <fmt:message key="main.page" var="mainPage"/>
     <fmt:message key="main.back" var="back"/>
+    <fmt:message key="course.return" var="backToCoursePage"/>
     <fmt:message key="mark.success.update" var="updateSuccess"/>
     <fmt:message key="mark.success.insert" var="insertSuccess"/>
     <fmt:message key="mark.changes.no" var="noChanges"/>
-
+    <fmt:message key="main.my.courses" var="MCourses"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -68,7 +69,8 @@
                 <button type="submit" class="btn btn-primary">${safe}</button>
             </form>
             <br>
-            <a href="/kz/course?courseID=${courseID}" class="btn btn-primary">${back}</a>
+            <a href="/kz/course?courseID=${courseID}" class="btn btn-primary">${backToCoursePage}</a>
+            <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br>
             <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
         </div>
         <div class="col-md-1 col-12"></div>

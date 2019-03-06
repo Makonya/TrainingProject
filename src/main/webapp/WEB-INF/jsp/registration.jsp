@@ -21,6 +21,8 @@
     <fmt:message key="registration.enter.email" var="enterEmail"/>
     <fmt:message key="registration.mregister" var="mregister"/>
 
+    <fmt:message key="welcome.authorization" var="MAuthorization"/>
+
     <fmt:message key="registration.error.login" var="login_error_reg"/>
     <fmt:message key="registration.error.login.exist" var="login_exist_reg"/>
     <fmt:message key="registration.error.password" var="password_error_reg"/>
@@ -46,7 +48,7 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${login_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="login" placeholder="${enterLogin}" name="login">
+                    <input type="text" class="form-control" id="login" placeholder="${enterLogin}" name="login" value="${loginInput}">
                 </div>
                 <div class="form-group">
                     <label for="password">${password}:</label>
@@ -72,7 +74,7 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${name_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="name" placeholder="${enterName}" name="name">
+                    <input type="text" class="form-control" id="name" placeholder="${enterName}" name="name"  value="${nameInput}">
                 </div>
                 <div class="form-group">
                     <label for="surname">${surname}:</label>
@@ -80,7 +82,7 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${surname_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="surname" placeholder="${enterSurname}" name="surname">
+                    <input type="text" class="form-control" id="surname" placeholder="${enterSurname}" name="surname" value="${surnameInput}">
                 </div>
                 <div class="form-group">
                     <label for="email">${email}:</label>
@@ -88,9 +90,10 @@
                         <p class="alert alert-warning"
                            style="height: 30px;padding: 5px">${email_error_reg}</p>
                     </c:if>
-                    <input type="text" class="form-control" id="email" placeholder="${enterEmail}" name="email">
+                    <input type="text" class="form-control" id="email" placeholder="${enterEmail}" name="email" value="${emailInput}">
                 </div>
                 <button type="submit" class="btn btn-primary">${mregister}</button>
+                <a href="/kz/authorization" class="btn btn-primary">${MAuthorization}</a>
             </form>
         </div>
         <div class="col-md-4"></div>

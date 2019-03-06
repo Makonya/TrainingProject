@@ -11,6 +11,8 @@ import java.util.List;
 public class CourseDao extends AbstractDao<Course> {
     private static final Logger LOGGER = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
+    //TODO write correct query
+    private static final String SQL_SELECT_EMPTY_COURSES = "SELECT * FROM COURSE";
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_BY_USER_ID = "SELECT * FROM COURSE where ID_USER=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
@@ -140,5 +142,21 @@ public class CourseDao extends AbstractDao<Course> {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
         return courses;
+    }
+
+    //TODO design this method
+    public List<Course> findEmptyCourses() {
+        List<Course> users = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_COURSES)) {
+            while (resultSet.next()) {
+                users.add(getCourseParameters(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Errors occurred while accessing the course table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return users;
     }
 }

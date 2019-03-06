@@ -2,7 +2,7 @@ package com.epam.training.util;
 
 public class AppConstant {
     //Directories
-    public static final String DIRECTORY = "C://Users//k_mak//IdeaProjects//TrainingProject//";
+    public static final String DIRECTORY = "C://Users//User//IdeaProjects//TrainingProject//";
     public static final String RESOURCES_DIRECTORY = "src//main//resources//";
 
     //Name of pages for redirect
@@ -18,6 +18,7 @@ public class AppConstant {
     public static final String ADD_MARKS = "addMarks";
     public static final String ADD_COURSE = "addCourse";
     public static final String ADD_CATEGORY = "addCategory";
+    public static final String DELETE_COURSE = "deleteCourse";
 
     //Locale
     public static final String DEFAULT_LANGUAGE = "ru";
@@ -105,6 +106,7 @@ public class AppConstant {
 
     //My courses
     public static final String ATT_MY_COURSES = "courseUsers";
+    public static final String CURRENT_DATE = "currentDate";
 
     //Edit course
     public static final String INPUT_COURSE_NAME = "nameInput";

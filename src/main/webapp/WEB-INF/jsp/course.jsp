@@ -50,7 +50,7 @@
                         </form>
                     </c:when>
                     <c:when test="${not empty student_delete_course}">
-                        <form action="/kz/deleteCourse" method="GET">
+                        <form action="/kz/deleteCourseFromMyCourses" method="GET">
                             <input type="hidden" value="${courseID}" name="courseID"/>
                             <button type="submit" class="btn btn-primary">${deleteCourse}</button>
                         </form>

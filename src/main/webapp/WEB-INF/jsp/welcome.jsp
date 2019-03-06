@@ -15,7 +15,9 @@
 
     <div class="row py-5 align-items-center">
         <div class="col-md-12">
-
+            <p class="text-center">
+                <img class="mylogo img-fluid img-profile rounded-circle mx-auto mb-2" src="/images/profile-picture.png">
+            </p>
             <p class="display-3 text-center">${MFString}</p>
             <p class="display-4 text-center">${MSString}</p>
             <p class="text-center">

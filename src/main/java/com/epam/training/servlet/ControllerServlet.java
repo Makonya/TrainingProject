@@ -3,6 +3,7 @@ package com.epam.training.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.TimeZone;
 
 import com.epam.training.action.Action;
 import com.epam.training.action.ActionFactory;
@@ -19,6 +20,7 @@ public class ControllerServlet extends javax.servlet.http.HttpServlet {
     public void init() {
         LOGGER.info("The servlet started working.");
         actionFactory = new ActionFactory();
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
     @Override

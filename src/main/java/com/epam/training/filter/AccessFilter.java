@@ -91,13 +91,15 @@ public class AccessFilter implements Filter {
         studentAccess.addAll(commonAccess);
         studentAccess.add("/addCourse");
         studentAccess.add("/addComment");
-        studentAccess.add("/deleteCourse");
+        studentAccess.add("/deleteCourseFromMyCourses");
         studentAccess.add("/myCourses");
     }
 
     private void initAdmin() {
         adminAccess.addAll(commonAccess);
         adminAccess.add("/addCategory");
+        adminAccess.add("/deleteCourse");
+        adminAccess.add("/deleteCoursePage");
     }
 
     private void initCommonAccess() {

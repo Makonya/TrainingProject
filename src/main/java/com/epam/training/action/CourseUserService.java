@@ -8,6 +8,7 @@ import static com.epam.training.util.AppConstant.ATT_COURSE_ID;
 import static com.epam.training.util.AppConstant.ATT_USER_ID;
 
 public class CourseUserService {
+
     public static CourseUser getCurrentUserCourse(HttpServletRequest request){
         String courseId = request.getParameter(ATT_COURSE_ID);
         int userId = (int) request.getSession().getAttribute(ATT_USER_ID);

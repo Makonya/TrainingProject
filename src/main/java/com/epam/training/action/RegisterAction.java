@@ -2,8 +2,6 @@ package com.epam.training.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.epam.training.dao.RoleDao;
 import com.epam.training.dao.UserDao;
@@ -13,6 +11,7 @@ import com.epam.training.util.Encryption;
 import org.apache.log4j.*;
 
 import static com.epam.training.util.AppConstant.*;
+import static com.epam.training.util.Validation.checkParamValid;
 
 public class RegisterAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(RegisterAction.class);
@@ -45,15 +44,17 @@ public class RegisterAction implements Action {
         if (!correctness) {
             correctness = true;
             LOGGER.warn("User validation failed!");
+            setEditedProfileValues(request);
             return new ActionResult(REGISTER);
         } else {
             User user = fillNewUserParameters();
             userDao.insert(user);
             LOGGER.info("Added new user with id = " + user.getId());
-            return new ActionResult(WELCOME);
+            return new ActionResult(AUTHORIZATION);
         }
     }
 
+    //TODO delete code duplicate
     private void setParameters(HttpServletRequest request) {
         login = request.getParameter(LOGIN);
         password = request.getParameter(PASSWORD);
@@ -63,13 +64,11 @@ public class RegisterAction implements Action {
         email = request.getParameter(EMAIL);
     }
 
-    private void checkParamValid(String paramName, String paramValue, String validator, HttpServletRequest request) {
-        Pattern pattern = Pattern.compile(validator);
-        Matcher matcher = pattern.matcher(paramValue);
-        if (!matcher.matches()) {
-            request.setAttribute(paramName, true);
-            correctness = false;
-        }
+    private void setEditedProfileValues(HttpServletRequest request) {
+        request.setAttribute(INPUT_LOGIN, login);
+        request.setAttribute(INPUT_NAME, name);
+        request.setAttribute(INPUT_SURNAME, surname);
+        request.setAttribute(INPUT_EMAIL, email);
     }
 
     private void paramValidation(HttpServletRequest req) {

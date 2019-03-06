@@ -25,20 +25,22 @@ public class ActionFactory {
         ACTIONS_MAP.put("GET/profile", new ShowProfileAction());
         ACTIONS_MAP.put("GET/course", new ShowCourseAction());
         ACTIONS_MAP.put("GET/addComment", new AddCommentAction());
-        ACTIONS_MAP.put("GET/addCourse", new AddCourseAction());
-        ACTIONS_MAP.put("GET/deleteCourse", new DeleteCourseAction());
+        ACTIONS_MAP.put("GET/addCourse", new AddCourseToMyCoursesAction());
+        ACTIONS_MAP.put("GET/deleteCourseFromMyCourses", new DeleteCourseFromMyCoursesAction());
         ACTIONS_MAP.put("GET/myCourses", new ShowMyCoursesAction());
         ACTIONS_MAP.put("GET/editCourse", new EditCourseAction());
         ACTIONS_MAP.put("GET/addMarks", new AddMarksAction());
-        ACTIONS_MAP.put("GET/addNewCourse", new AddNewCourse());
+        ACTIONS_MAP.put("GET/addNewCourse", new AddNewCourseAction());
         ACTIONS_MAP.put("GET/addCategory", new AddCategoryAction());
+        ACTIONS_MAP.put("GET/deleteCoursePage", new ShowDeleteCoursePage());
+        ACTIONS_MAP.put("GET/deleteCourse", new DeleteCourseAction());
 
         ACTIONS_MAP.put("POST/authorization", new LoginAction());
         ACTIONS_MAP.put("POST/registration", new RegisterAction());
         ACTIONS_MAP.put("POST/profile", new EditProfileDataAction());
         ACTIONS_MAP.put("POST/editCourse", new EditCourseAction());
         ACTIONS_MAP.put("POST/addMarks", new AddMarksAction());
-        ACTIONS_MAP.put("POST/addNewCourse", new AddNewCourse());
+        ACTIONS_MAP.put("POST/addNewCourse", new AddNewCourseAction());
         ACTIONS_MAP.put("POST/addCategory", new AddCategoryAction());
     }
 

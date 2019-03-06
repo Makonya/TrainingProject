@@ -9,15 +9,13 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static com.epam.training.util.AppConstant.*;
 import static com.epam.training.util.Validation.checkParamValid;
+import static com.epam.training.util.DateParser.parseDate;
 
-public class AddNewCourse implements Action {
+public class AddNewCourseAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(EditCourseAction.class);
     private int localId;
 
@@ -28,7 +26,7 @@ public class AddNewCourse implements Action {
             case METHOD_POST:
                 int userId = (int) request.getSession().getAttribute(ATT_USER_ID);
                 Course course = checkCourseParameters(request);
-                if( course != null){
+                if (course != null) {
                     CourseDao courseDao = new CourseDao();
                     course.setIdUser(userId);
                     if (courseDao.insert(course)) {
@@ -67,7 +65,7 @@ public class AddNewCourse implements Action {
             correctness++;
             request.setAttribute(INPUT_COURSE_DATE_END, endDate);
         } else {
-            course.setStartDate(parseDate(endDate));
+            course.setEndDate(parseDate(endDate));
         }
         if (correctness == 0) {
             if (parseDate(endDate).before(parseDate(startDate))) {
@@ -77,13 +75,14 @@ public class AddNewCourse implements Action {
         }
         course.setCourseName(request.getParameter(COURSE_NAME));
         course.setDescription(request.getParameter(DESCRIPTION));
-        if (!checkParamValid(COURSE_NAME_VAL_ERROR, course.getCourseName(), COURSE_NAME_VALIDATION, request)) correctness++;
+        if (!checkParamValid(COURSE_NAME_VAL_ERROR, course.getCourseName(), COURSE_NAME_VALIDATION, request))
+            correctness++;
         if (!checkParamValid(COURSE_DESCRIPTION_VAL_ERROR, course.getDescription(), DESCRIPTION_VALIDATION, request))
             correctness++;
         CategoryDao categoryDao = new CategoryDao();
         String category = request.getParameter(COURSE_CATEGORY);
         course.setIdCategory(categoryDao.findAllByName(category).getId());
-        if(correctness == 0){
+        if (correctness == 0) {
             return course;
         } else {
             request.setAttribute(INPUT_COURSE_NAME, course.getCourseName());
@@ -91,16 +90,5 @@ public class AddNewCourse implements Action {
             request.setAttribute(COURSE_CATEGORY, category);
         }
         return null;
-    }
-
-    private Date parseDate(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date parsed = null;
-        try {
-            parsed = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new java.sql.Date(parsed != null ? parsed.getTime() : 0);
     }
 }

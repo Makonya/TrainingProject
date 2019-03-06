@@ -6,12 +6,10 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import static com.epam.training.util.AppConstant.*;
 import static com.epam.training.util.Validation.checkParamValid;
+import static com.epam.training.util.DateParser.parseDate;
 
 public class EditCourseAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(EditCourseAction.class);
@@ -73,17 +71,6 @@ public class EditCourseAction implements Action {
         courseDescription = request.getParameter(DESCRIPTION);
         startDate = request.getParameter(COURSE_START_DATE);
         endDate = request.getParameter(COURSE_END_DATE);
-    }
-
-    private Date parseDate(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date parsed = null;
-        try {
-            parsed = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new java.sql.Date(parsed != null ? parsed.getTime() : 0);
     }
 
     private void parametersValidation(HttpServletRequest request) {

@@ -18,6 +18,7 @@
     <fmt:message key="main.footer.edit" var="MEdit"/>
     <fmt:message key="main.my.courses" var="MCourses"/>
     <fmt:message key="main.header.add.category" var="MAddCategory"/>
+    <fmt:message key="main.header.delete.course" var="MDeleteCourse"/>
 </fmt:bundle>
 <html lang=${sessionScope.lang}>
 <head>
@@ -44,7 +45,7 @@
                     <a class="dropdown-item" href="set-language?lang=en">English</a>
                 </div>
             </div>
-        </div>
+            </div>
         <div class="col-md-8 col-12">
             <h1 class="display-4 text-uppercase text-center">${MHeader}</h1>
         </div>
@@ -58,6 +59,7 @@
                         <c:choose>
                             <c:when test="${sessionScope.role eq 'admin'}">
                                 <a class="dropdown-item" href="/kz/addCategory">${MAddCategory}</a>
+                                <a class="dropdown-item" href="/kz/deleteCoursePage">${MDeleteCourse}</a>
                             </c:when>
                             <c:otherwise>
                                 <a class="dropdown-item" href="/kz/myCourses">${MCourses}</a>
