@@ -170,6 +170,7 @@ CREATE TABLE IF NOT EXISTS `faculty`.`COURSE_USER` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- View `faculty`.`COURSE_STUDENTS`
 -- -----------------------------------------------------
