@@ -70,7 +70,7 @@
             </form>
             <br>
             <a href="/kz/course?courseID=${courseID}" class="btn btn-primary">${backToCoursePage}</a>
-            <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br>
+            <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br><br>
             <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a>
         </div>
         <div class="col-md-1 col-12"></div>

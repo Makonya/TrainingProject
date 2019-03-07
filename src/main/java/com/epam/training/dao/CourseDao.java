@@ -7,16 +7,16 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CourseDao extends AbstractDao<Course> {
     private static final Logger LOGGER = Logger.getLogger(CourseDao.class);
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM COURSE";
-    //TODO write correct query
-    private static final String SQL_SELECT_EMPTY_COURSES = "SELECT * FROM COURSE";
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT * FROM COURSE c LEFT JOIN USER u ON c.ID_USER=u.ID_USER WHERE ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_BY_USER_ID = "SELECT * FROM COURSE where ID_USER=?";
     private static final String SQL_SELECT_COURSES_BY_CATEGORY = "SELECT * FROM COURSE WHERE ID_CATEGORY=?";
     private static final String SQL_INSERT_COURSE = "INSERT INTO COURSE(COURSE_NAME,DESCRIPTION,START_DATE,END_DATE,ID_USER,ID_CATEGORY) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_DELETE_COURSE_BY_ID = "DELETE FROM COURSE WHERE ID_COURSE=?";
     private static final String SQL_UPDATE_COURSE = "UPDATE COURSE SET COURSE_NAME = ?, DESCRIPTION = ?, START_DATE = ?, END_DATE = ? WHERE ID_COURSE=?";
 
     @Override
@@ -62,7 +62,19 @@ public class CourseDao extends AbstractDao<Course> {
 
     @Override
     public boolean delete(int id) {
-        return false;
+        boolean deleted = false;
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_COURSE_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            deleted = true;
+            LOGGER.info("Course was deleted. Course ID = " + id);
+        } catch (SQLException e) {
+            LOGGER.error("Course wasn't deleted. " + e);
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return deleted;
     }
 
     @Override
@@ -144,19 +156,23 @@ public class CourseDao extends AbstractDao<Course> {
         return courses;
     }
 
-    //TODO design this method
-    public List<Course> findEmptyCourses() {
-        List<Course> users = new ArrayList<>();
+    public List<Course> findByIds(Set<Integer> ids) {
+        List<Course> courses = new ArrayList<>();
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_COURSES)) {
-            while (resultSet.next()) {
-                users.add(getCourseParameters(resultSet));
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_ID)) {
+            for (Integer id : ids) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        courses.add(getCourseParameters(resultSet));
+                    }
+                }
             }
         } catch (SQLException e) {
             LOGGER.error("Errors occurred while accessing the course table! " + e.getMessage());
         } finally {
             ConnectionPool.getConnectionPool().releaseConnection(connection);
         }
-        return users;
+        return courses;
     }
 }

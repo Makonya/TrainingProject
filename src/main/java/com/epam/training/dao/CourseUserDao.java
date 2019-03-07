@@ -4,15 +4,13 @@ import com.epam.training.pool.ConnectionPool;
 import com.epam.training.entity.CourseUser;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseUserDao extends AbstractDao<CourseUser> {
     private static final Logger LOGGER = Logger.getLogger(CourseUser.class);
+    private static final String SQL_SELECT_ALL_COURSE_USER = "SELECT * FROM COURSE_USER";
     private static final String SQL_SELECT_COURSE_USER_BY_USER_COURSE_ID = "SELECT * FROM COURSE_USER WHERE ID_USER=? AND ID_COURSE=?";
     private static final String SQL_SELECT_COURSE_USER_BY_USER_ID = "SELECT * FROM COURSE_USER c_u " +
             "LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER " +
@@ -94,7 +92,21 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
     }
     @Override
     public List<CourseUser> findAll() {
-        return null;
+        List<CourseUser> courseUserList = new ArrayList<>();
+        Connection connection = ConnectionPool.getConnectionPool().getConnection();
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_COURSE_USER)) {
+            while (resultSet.next()) {
+                CourseUser courseUser = new CourseUser();
+                courseUser.setIdCourse(resultSet.getInt("ID_COURSE"));
+                courseUser.setIdUser(resultSet.getInt("ID_USER"));
+                courseUserList.add(courseUser);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Errors occurred while accessing the course_user table! " + e.getMessage());
+        } finally {
+            ConnectionPool.getConnectionPool().releaseConnection(connection);
+        }
+        return courseUserList;
     }
 
     @Override

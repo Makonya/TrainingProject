@@ -170,6 +170,10 @@ CREATE TABLE IF NOT EXISTS `faculty`.`COURSE_USER` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- View `faculty`.`COURSE_STUDENTS`
+-- -----------------------------------------------------
+CREATE VIEW COURSE_STUDENTS AS SELECT c_u.ID_COURSE, u.NAME, u.SURNAME  FROM COURSE_USER c_u, USER u WHERE c_u.ID_USER=u.ID_USER;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

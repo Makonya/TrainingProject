@@ -11,6 +11,8 @@
     <fmt:message key="button.delete" var="deleteButton"/>
     <fmt:message key="courses.alert" var="reviewInfo"/>
     <fmt:message key="main.page" var="mainPage"/>
+    <fmt:message key="course.delete.success" var="deleteCourseSuccess"/>
+    <fmt:message key="course.delete.error" var="deleteCourseError"/>
 </fmt:bundle>
 
 <my:designPattern role="">
@@ -19,6 +21,14 @@
         <div class="col-md-10 col-12 pl-5">
             <h2>${coursesList}</h2>
             <p class="display-6">*${reviewInfo}</p>
+            <c:if test="${not empty course_delete_success}">
+                <p class="alert alert-success"
+                   style="height: 30px;padding: 5px">${deleteCourseSuccess}</p>
+            </c:if>
+            <c:if test="${not empty course_delete_error}">
+                <p class="alert alert-warning"
+                   style="height: 30px;padding: 5px">${deleteCourseError}</p>
+            </c:if>
             <table class="table table-hover">
                 <thead>
                 <tr>

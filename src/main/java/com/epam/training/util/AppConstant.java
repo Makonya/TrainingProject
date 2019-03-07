@@ -139,4 +139,8 @@ public class AppConstant {
     public static final String CATEGORY_NAME = "categoryName";
     public static final String CATEGORY_ADD_SUCCESS = "success_add_category";
     public static final String CATEGORY_EXIST_ERROR = "category_exist_error";
+
+    //Delete course
+    public static final String DELETE_COURSE_ERROR = "course_delete_error";
+    public static final String DELETE_COURSE_SUCCESS = "course_delete_success";
 }
