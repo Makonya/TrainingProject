@@ -19,7 +19,7 @@ public class MarkDao extends AbstractDao<Mark> {
 
     @Override
     public List<Mark> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     public boolean findByCourseUserId(Mark mark) {
@@ -43,22 +43,22 @@ public class MarkDao extends AbstractDao<Mark> {
 
     @Override
     public Mark findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(Mark entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean insert(Mark entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     public boolean insert(List<Mark> marks) {

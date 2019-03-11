@@ -13,6 +13,7 @@ import java.util.Locale;
 import static com.epam.training.util.AppConstant.*;
 
 public class LocaleFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) {
     }

@@ -1,7 +1,7 @@
 package com.epam.training.entity;
 
 public class Locale extends BaseEntity {
-    private  String localeName;
+    private String localeName;
 
     public String getLocaleName() {
         return localeName;

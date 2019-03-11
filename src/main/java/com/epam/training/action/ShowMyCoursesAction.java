@@ -13,6 +13,7 @@ import java.util.List;
 import static com.epam.training.util.AppConstant.*;
 
 public class ShowMyCoursesAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int userId = (int) request.getSession().getAttribute(ATT_USER_ID);

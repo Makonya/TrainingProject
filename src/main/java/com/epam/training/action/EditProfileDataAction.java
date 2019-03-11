@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static com.epam.training.util.AppConstant.*;
 import static com.epam.training.util.Validation.checkParamValid;
+import static com.epam.training.action.UserDataService.setProfileValues;
 
 public class EditProfileDataAction implements Action {
     private User user;
@@ -26,9 +27,9 @@ public class EditProfileDataAction implements Action {
         user = userDao.findById(userId);
         password = request.getParameter(PASSWORD);
         passwordRepeat = request.getParameter(PASSWORD_REPEAT);
+        email = request.getParameter(EMAIL);
         name = request.getParameter(NAME);
         surname = request.getParameter(SURNAME);
-        email = request.getParameter(EMAIL);
         paramValidation(request);
         if (!password.equals(passwordRepeat)) {
             request.setAttribute(PASSWORD2_VAL_ERROR, true);
@@ -37,8 +38,7 @@ public class EditProfileDataAction implements Action {
         if (correctness == 0) {
             fillEditedUserParameters();
             request.setAttribute(EDIT_SUCCESS, userDao.update(user));
-            setProfileValues(request);
-
+            setProfileValues(request, user);
         } else {
             correctness = 0;
             setEditedProfileValues(request);
@@ -47,11 +47,11 @@ public class EditProfileDataAction implements Action {
     }
 
     private void paramValidation(HttpServletRequest req) {
+        if (!checkParamValid(EMAIL_VAL_ERROR, email, EMAIL_VALIDATION, req)) correctness++;
+        if (!checkParamValid(NAME_VAL_ERROR, name, NAME_VALIDATION, req)) correctness++;
         if (!password.isEmpty() && !passwordRepeat.isEmpty()) {
             if (!checkParamValid(PASSWORD_VAL_ERROR, password, PASSWORD_VALIDATION, req)) correctness++;
         }
-        if (!checkParamValid(EMAIL_VAL_ERROR, email, EMAIL_VALIDATION, req)) correctness++;
-        if (!checkParamValid(NAME_VAL_ERROR, name, NAME_VALIDATION, req)) correctness++;
         if (!checkParamValid(SURNAME_VAL_ERROR, surname, SURNAME_VALIDATION, req)) correctness++;
     }
 
@@ -64,12 +64,6 @@ public class EditProfileDataAction implements Action {
         user.setEmail(email);
     }
 
-    private void setProfileValues(HttpServletRequest request) {
-        request.setAttribute(INPUT_LOGIN, user.getLogin());
-        request.setAttribute(INPUT_NAME, user.getName());
-        request.setAttribute(INPUT_SURNAME, user.getSurname());
-        request.setAttribute(INPUT_EMAIL, user.getEmail());
-    }
 
     private void setEditedProfileValues(HttpServletRequest request) {
         request.setAttribute(INPUT_LOGIN, user.getLogin());

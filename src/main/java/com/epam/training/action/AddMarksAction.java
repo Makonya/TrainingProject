@@ -14,6 +14,7 @@ import java.util.List;
 import static com.epam.training.util.AppConstant.*;
 
 public class AddMarksAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));

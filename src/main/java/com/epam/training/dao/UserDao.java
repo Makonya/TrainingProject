@@ -6,6 +6,7 @@ import com.epam.training.entity.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.*;
 
 public class UserDao extends AbstractDao<User> {
@@ -40,7 +41,7 @@ public class UserDao extends AbstractDao<User> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ID)) {
             preparedStatement.setInt(1, id);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     user = getUserParameters(resultSet);
                 }
@@ -58,7 +59,7 @@ public class UserDao extends AbstractDao<User> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN)) {
             preparedStatement.setString(1, login);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     exist = true;
                 }
@@ -75,7 +76,7 @@ public class UserDao extends AbstractDao<User> {
     public boolean delete(User entity) {
         boolean deleted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.execute();
             deleted = true;
@@ -92,7 +93,7 @@ public class UserDao extends AbstractDao<User> {
     public boolean delete(int id) {
         boolean deleted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             deleted = true;
@@ -109,9 +110,9 @@ public class UserDao extends AbstractDao<User> {
     public boolean insert(User entity) {
         boolean inserted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS)) {
             setUserParameters(preparedStatement, entity).executeUpdate();
-            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()){
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 resultSet.next();
                 entity.setId(resultSet.getInt(1));
             }
@@ -129,8 +130,8 @@ public class UserDao extends AbstractDao<User> {
     public boolean update(User entity) {
         boolean updated = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER)) {
-            preparedStatement.setInt(7,entity.getId());
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER)) {
+            preparedStatement.setInt(7, entity.getId());
             setUserParameters(preparedStatement, entity).executeUpdate();
             updated = true;
         } catch (SQLException e) {
@@ -147,7 +148,7 @@ public class UserDao extends AbstractDao<User> {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN_PASSWORD)) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     user = getUserParameters(resultSet);
                 }
@@ -160,13 +161,13 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
-    private PreparedStatement setUserParameters(PreparedStatement preparedStatement, User entity) throws SQLException{
-        preparedStatement.setString(1,entity.getLogin());
-        preparedStatement.setString(2,entity.getPassword());
-        preparedStatement.setString(3,entity.getName());
-        preparedStatement.setString(4,entity.getSurname());
-        preparedStatement.setString(5,entity.getEmail());
-        preparedStatement.setInt(6,entity.getIdRole());
+    private PreparedStatement setUserParameters(PreparedStatement preparedStatement, User entity) throws SQLException {
+        preparedStatement.setString(1, entity.getLogin());
+        preparedStatement.setString(2, entity.getPassword());
+        preparedStatement.setString(3, entity.getName());
+        preparedStatement.setString(4, entity.getSurname());
+        preparedStatement.setString(5, entity.getEmail());
+        preparedStatement.setInt(6, entity.getIdRole());
         return preparedStatement;
     }
 

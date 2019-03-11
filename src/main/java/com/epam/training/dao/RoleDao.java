@@ -6,6 +6,7 @@ import com.epam.training.entity.Role;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.*;
 
 public class RoleDao extends AbstractDao<Role> {
@@ -40,7 +41,7 @@ public class RoleDao extends AbstractDao<Role> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ROLE_BY_ID)) {
             preparedStatement.setInt(1, id);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     role = getRoleParameters(resultSet);
                 }
@@ -67,10 +68,10 @@ public class RoleDao extends AbstractDao<Role> {
     public boolean insert(Role entity) {
         boolean inserted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_ROLE, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_ROLE, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
-            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()){
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 resultSet.next();
                 entity.setId(resultSet.getInt(1));
             }
@@ -95,7 +96,7 @@ public class RoleDao extends AbstractDao<Role> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ROLE_BY_NAME)) {
             preparedStatement.setString(1, roleName);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     role = getRoleParameters(resultSet);
                 }

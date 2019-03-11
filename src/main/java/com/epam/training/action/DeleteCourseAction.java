@@ -13,7 +13,7 @@ public class DeleteCourseAction implements Action {
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));
         CourseDao courseDao = new CourseDao();
-        if(courseDao.delete(courseId)){
+        if (courseDao.delete(courseId)) {
             request.setAttribute(DELETE_COURSE_SUCCESS, true);
         } else {
             request.setAttribute(DELETE_COURSE_ERROR, true);

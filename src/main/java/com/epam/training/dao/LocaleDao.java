@@ -34,35 +34,35 @@ public class LocaleDao extends AbstractDao<Locale> {
 
     @Override
     public Locale findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(Locale entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean insert(Locale entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean update(Locale entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
-    public Locale findByLocaleName(String localeName){
+    public Locale findByLocaleName(String localeName) {
         Locale locale = null;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_LOCALE_BY_NAME)) {
             preparedStatement.setString(1, localeName);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     locale = new Locale();
                     locale.setId(resultSet.getInt("ID_LOCALE"));

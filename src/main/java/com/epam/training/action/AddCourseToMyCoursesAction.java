@@ -10,6 +10,7 @@ import static com.epam.training.action.CourseUserService.getCurrentUserCourse;
 import static com.epam.training.util.AppConstant.REFERER;
 
 public class AddCourseToMyCoursesAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         CourseUser courseUser = getCurrentUserCourse(request);

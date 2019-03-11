@@ -22,7 +22,6 @@ public class RegisterAction implements Action {
     private String surname;
     private String email;
     private int idRole;
-
     private boolean correctness = true;
 
     @Override
@@ -54,14 +53,14 @@ public class RegisterAction implements Action {
         }
     }
 
-    //TODO delete code duplicate
     private void setParameters(HttpServletRequest request) {
-        login = request.getParameter(LOGIN);
         password = request.getParameter(PASSWORD);
         passwordRepeat = request.getParameter(PASSWORD_REPEAT);
+        login = request.getParameter(LOGIN);
         name = request.getParameter(NAME);
-        surname = request.getParameter(SURNAME);
         email = request.getParameter(EMAIL);
+        surname = request.getParameter(SURNAME);
+
     }
 
     private void setEditedProfileValues(HttpServletRequest request) {

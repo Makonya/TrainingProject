@@ -10,6 +10,7 @@ import java.sql.Date;
 import static com.epam.training.util.AppConstant.*;
 
 public class AddCommentAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         String commentText = request.getParameter(ATT_COURSE_COMMENT_TEXT);

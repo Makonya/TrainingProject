@@ -90,6 +90,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
         }
         return courseUsers;
     }
+
     @Override
     public List<CourseUser> findAll() {
         List<CourseUser> courseUserList = new ArrayList<>();
@@ -111,7 +112,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
 
     @Override
     public CourseUser findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -134,7 +135,7 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
 
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -157,6 +158,6 @@ public class CourseUserDao extends AbstractDao<CourseUser> {
 
     @Override
     public boolean update(CourseUser entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 }

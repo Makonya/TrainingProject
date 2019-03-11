@@ -16,29 +16,29 @@ public class FeedbackDao extends AbstractDao<Feedback> {
 
     @Override
     public List<Feedback> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Feedback findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(Feedback entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean insert(Feedback comment) {
         boolean inserted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK)) {
             setFeedbackParameters(preparedStatement, comment).executeUpdate();
             LOGGER.info("Inserted new feedback comment");
             inserted = true;
@@ -52,15 +52,15 @@ public class FeedbackDao extends AbstractDao<Feedback> {
 
     @Override
     public boolean update(Feedback entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
-    public List<Feedback> findByCourseId(int courseId){
+    public List<Feedback> findByCourseId(int courseId) {
         List<Feedback> feedback = new ArrayList<>();
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FEEDBACK_BY_COURSE_ID)) {
             preparedStatement.setInt(1, courseId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Feedback comment = getFeedbackParameters(resultSet);
                     feedback.add(comment);
@@ -74,13 +74,13 @@ public class FeedbackDao extends AbstractDao<Feedback> {
         return feedback;
     }
 
-    public boolean findByCourseUserId(int courseId, int userId){
+    public boolean findByCourseUserId(int courseId, int userId) {
         boolean exist = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FEEDBACK_BY_COURSE_USER_ID)) {
             preparedStatement.setInt(2, userId);
             preparedStatement.setInt(1, courseId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     exist = true;
                 }

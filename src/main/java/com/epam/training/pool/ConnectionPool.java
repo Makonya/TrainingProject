@@ -38,7 +38,7 @@ public class ConnectionPool {
         String url = properties.getProperty("db.url");
         String user = properties.getProperty("db.user");
         String password = properties.getProperty("db.password");
-        String poolSizeStr = properties.getProperty("db.poolsize");
+        String poolSizeStr = properties.getProperty("db.poolSize");
         int poolSize = (poolSizeStr != null) ? Integer.parseInt(poolSizeStr) : DEFAULT_POOL_SIZE;
         try {
             try {

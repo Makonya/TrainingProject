@@ -14,6 +14,7 @@ import java.util.List;
 import static com.epam.training.util.AppConstant.*;
 
 public class ShowCourseAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         String courseId = request.getParameter(ATT_COURSE_ID);

@@ -74,9 +74,6 @@ public class EditCourseAction implements Action {
     }
 
     private void parametersValidation(HttpServletRequest request) {
-        if (!checkParamValid(COURSE_NAME_VAL_ERROR, courseName, COURSE_NAME_VALIDATION, request)) correctness++;
-        if (!checkParamValid(COURSE_DESCRIPTION_VAL_ERROR, courseDescription, DESCRIPTION_VALIDATION, request))
-            correctness++;
         if (!checkParamValid(COURSE_START_DATE_VAL_ERROR, startDate, DATE_VALIDATION, request)) correctness++;
         if (!checkParamValid(COURSE_END_DATE_VAL_ERROR, endDate, DATE_VALIDATION, request)) correctness++;
         if (correctness == 0) {
@@ -85,6 +82,9 @@ public class EditCourseAction implements Action {
                 correctness++;
             }
         }
+        if (!checkParamValid(COURSE_NAME_VAL_ERROR, courseName, COURSE_NAME_VALIDATION, request)) correctness++;
+        if (!checkParamValid(COURSE_DESCRIPTION_VAL_ERROR, courseDescription, DESCRIPTION_VALIDATION, request))
+            correctness++;
     }
 
     private Course fillValidatedParameters() {

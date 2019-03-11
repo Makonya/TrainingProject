@@ -17,12 +17,12 @@ public class CategoryDao extends AbstractDao<Category> {
 
     @Override
     public List<Category> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Category findById(int id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     public List<Category> findAllByIdLocale(int idLocale) {
@@ -30,7 +30,7 @@ public class CategoryDao extends AbstractDao<Category> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_CATEGORY_BY_LOCALE_ID)) {
             preparedStatement.setInt(1, idLocale);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Category category = new Category();
                     category.setId(resultSet.getInt("ID_CATEGORY"));
@@ -52,7 +52,7 @@ public class CategoryDao extends AbstractDao<Category> {
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_CATEGORY_BY_NAME)) {
             preparedStatement.setString(1, categoryName);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     category = new Category();
                     category.setId(resultSet.getInt("ID_CATEGORY"));
@@ -70,22 +70,22 @@ public class CategoryDao extends AbstractDao<Category> {
 
     @Override
     public boolean delete(Category entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean insert(Category entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean update(Category entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     public boolean insert(List<Category> categories) {
@@ -116,7 +116,7 @@ public class CategoryDao extends AbstractDao<Category> {
         return inserted;
     }
 
-    public int getLastId(){
+    public int getLastId() {
         int id = 0;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(SQL_SELECT_LAST_CATEGORY_ID)) {

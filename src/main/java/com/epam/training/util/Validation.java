@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
+
     public static boolean checkParamValid(String paramName, String paramValue, String validator, HttpServletRequest request) {
         boolean valid = true;
         Pattern pattern = Pattern.compile(validator);

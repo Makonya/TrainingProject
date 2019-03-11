@@ -57,14 +57,14 @@ public class CourseDao extends AbstractDao<Course> {
 
     @Override
     public boolean delete(Course entity) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int id) {
         boolean deleted = false;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_COURSE_BY_ID)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_COURSE_BY_ID)) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             deleted = true;
@@ -138,7 +138,7 @@ public class CourseDao extends AbstractDao<Course> {
         return preparedStatement;
     }
 
-    private List<Course> findBySomeId(String statement, int id){
+    private List<Course> findBySomeId(String statement, int id) {
         List<Course> courses = new ArrayList<>();
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {

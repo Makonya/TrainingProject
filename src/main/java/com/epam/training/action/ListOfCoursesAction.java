@@ -14,6 +14,7 @@ import java.util.List;
 import static com.epam.training.util.AppConstant.*;
 
 public class ListOfCoursesAction implements Action {
+
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int localId = LocaleUtil.getLocaleId(request);
