@@ -18,8 +18,10 @@ public class AddMarksAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));
+
         CourseUserDao courseUserDao = new CourseUserDao();
         List<CourseUser> courseUsers = courseUserDao.findByCourseId(courseId);
+
         CourseDao courseDao = new CourseDao();
         if (request.getMethod().equals(METHOD_POST)) {
             List<Mark> marksToInsert = new ArrayList<>();

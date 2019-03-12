@@ -174,7 +174,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- View `faculty`.`COURSE_STUDENTS`
 -- -----------------------------------------------------
-CREATE VIEW COURSE_STUDENTS AS SELECT c_u.ID_COURSE, u.NAME, u.SURNAME  FROM COURSE_USER c_u, USER u WHERE c_u.ID_USER=u.ID_USER;
+-- CREATE VIEW COURSE_STUDENTS AS SELECT c_u.ID_COURSE, u.NAME, u.SURNAME  FROM COURSE_USER c_u, USER u WHERE c_u.ID_USER=u.ID_USER;
+
+-- -----------------------------------------------------
+-- View `faculty`.`COURSE_STUDENTS`
+-- -----------------------------------------------------
+CREATE VIEW COURSE_STUDENTS AS SELECT c_u.ID_COURSE, c_u.ID_USER, u.NAME, u.SURNAME, m.MARK FROM COURSE_USER c_u
+			LEFT JOIN MARK m ON c_u.ID_COURSE=m.ID_COURSE AND c_u.ID_USER=m.ID_USER
+            LEFT JOIN USER u ON c_u.ID_USER=u.ID_USER;
+
+-- -----------------------------------------------------
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

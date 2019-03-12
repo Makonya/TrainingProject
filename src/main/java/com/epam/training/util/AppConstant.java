@@ -101,6 +101,7 @@ public class AppConstant {
     public static final String ATT_COURSE_EDIT = "editCourse";
     public static final String ATT_COURSE_MARK = "markStudents";
     public static final String ATT_COURSE_FEEDBACK = "feedback";
+    public static final String ATT_COURSE_USERS = "courseUsers";
     public static final String ATT_COURSE_COMMENT_TEXT = "myComment";
     public static final String ATT_COURSE_DELETE_COMMENT = "student_delete_course";
 

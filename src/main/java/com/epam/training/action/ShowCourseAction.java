@@ -1,9 +1,12 @@
 package com.epam.training.action;
 
 import com.epam.training.dao.CourseDao;
+import com.epam.training.dao.CourseStudentsDao;
 import com.epam.training.dao.CourseUserDao;
 import com.epam.training.dao.FeedbackDao;
 import com.epam.training.entity.Course;
+import com.epam.training.entity.CourseStudents;
+import com.epam.training.entity.CourseUser;
 import com.epam.training.entity.Feedback;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +27,16 @@ public class ShowCourseAction implements Action {
         Date courseEndDate = course.getEndDate();
         Date currentDate = new Date();
         int userId = (int) request.getSession().getAttribute(ATT_USER_ID);
-        CourseUserDao courseUserDao = new CourseUserDao();
+
+        CourseStudentsDao courseStudentsDao = new CourseStudentsDao();
+        List<CourseStudents> courseStudentsList = courseStudentsDao.findByCourseId(Integer.parseInt(courseId));
+        request.setAttribute(ATT_COURSE_USERS, courseStudentsList);
 
         FeedbackDao feedbackDao = new FeedbackDao();
         List<Feedback> feedback = feedbackDao.findByCourseId(Integer.parseInt(courseId));
         request.setAttribute(ATT_COURSE_FEEDBACK, feedback);
 
+        CourseUserDao courseUserDao = new CourseUserDao();
         if (courseEndDate.before(currentDate)) {
             if (courseUserDao.findByUserCourseId(userId, Integer.parseInt(courseId)) && !feedbackDao.findByCourseUserId(Integer.parseInt(courseId), userId)) {
                 request.setAttribute(ATT_COURSE_ADD_COMMENT, true);
