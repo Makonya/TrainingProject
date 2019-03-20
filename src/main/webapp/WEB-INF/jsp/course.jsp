@@ -22,7 +22,7 @@
     <fmt:message key="main.my.courses" var="MCourses"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
 
     <div class="row py-5 align-items-center">
         <div class="col-md-1 col-12"></div>
@@ -59,6 +59,14 @@
                 </c:choose>
             </c:if>
             <c:if test="${sessionScope.role eq 'teacher'}">
+                <c:if test="${not empty courseUsers}">
+                    <div class="jumbotron">
+                        <h2>${studentsList}:</h2>
+                        <c:forEach items="${courseUsers}" var="student" varStatus="studentsCounter">
+                            <p class="text-info">${studentsCounter.count}. ${student.studentName} ${student.studentSurname}</p>
+                        </c:forEach>
+                    </div>
+                </c:if>
                 <c:if test="${not empty editCourse}">
                     <a href="/kz/editCourse?courseID=${courseID}" class="btn btn-primary">${courseEdit}</a>
                 </c:if>
@@ -68,15 +76,6 @@
             </c:if>
             <c:if test="${sessionScope.role != 'admin'}">
                 <a href="/kz/myCourses" class="btn btn-primary">${MCourses}</a><br/><br/>
-            </c:if>
-            <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a><br/><br/>
-            <c:if test="${not empty courseUsers}">
-                <div class="jumbotron">
-                    <h2>${studentsList}:</h2>
-                    <c:forEach items="${courseUsers}" var="student" varStatus="studentsCounter">
-                        <p class="text-info">${studentsCounter.count}. ${student.studentName} ${student.studentSurname}</p>
-                    </c:forEach>
-                </div>
             </c:if>
             <c:if test="${not empty feedback}">
                 <div class="jumbotron">
@@ -89,6 +88,7 @@
                     </c:forEach>
                 </div>
             </c:if>
+            <a href="/kz/listOfCourses" class="btn btn-primary">${mainPage}</a><br/><br/>
         </div>
         <div class="col-md-1 col-12"></div>
     </div>

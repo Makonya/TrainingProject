@@ -6,7 +6,6 @@ import com.epam.training.dao.CourseUserDao;
 import com.epam.training.dao.FeedbackDao;
 import com.epam.training.entity.Course;
 import com.epam.training.entity.CourseStudents;
-import com.epam.training.entity.CourseUser;
 import com.epam.training.entity.Feedback;
 
 import javax.servlet.http.HttpServletRequest;

@@ -42,5 +42,6 @@ public class LocaleFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 }

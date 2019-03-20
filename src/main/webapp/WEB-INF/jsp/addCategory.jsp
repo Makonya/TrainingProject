@@ -14,7 +14,7 @@
     <fmt:message key="main.page" var="mainPage"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
 
     <div class="row py-5 align-items-center">
         <div class="col-md-2 col-12"></div>

@@ -9,8 +9,6 @@ public class CourseUser extends BaseEntity {
     private Date tempStartDate;
     private Date tempEndDate;
     private String tempCourseName;
-    private String tempStudentName;
-    private String tempStudentSurname;
 
     public int getIdCourse() {
         return idCourse;
@@ -58,21 +56,5 @@ public class CourseUser extends BaseEntity {
 
     public void setTempCourseName(String tempCourseName) {
         this.tempCourseName = tempCourseName;
-    }
-
-    public String getTempStudentName() {
-        return tempStudentName;
-    }
-
-    public void setTempStudentName(String tempStudentName) {
-        this.tempStudentName = tempStudentName;
-    }
-
-    public String getTempStudentSurname() {
-        return tempStudentSurname;
-    }
-
-    public void setTempStudentSurname(String tempStudentSurname) {
-        this.tempStudentSurname = tempStudentSurname;
     }
 }

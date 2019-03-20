@@ -20,7 +20,7 @@
     <fmt:message key="main.back" var="back"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
 
     <div class="row py-5 align-items-center">
         <div class="col-md-2 col-12"></div>
@@ -112,7 +112,7 @@
                         field.selectionEnd = oldEnd;
                     }
 
-                    field.addEventListener('click', changed)
+                    field.addEventListener('click', changed);
                     field.addEventListener('keyup', changed)
                 }
             </script>

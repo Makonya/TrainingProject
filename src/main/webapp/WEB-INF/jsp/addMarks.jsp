@@ -20,7 +20,8 @@
     <fmt:message key="main.my.courses" var="MCourses"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
+
     <div class="row py-5 align-items-center">
         <div class="col-md-1 col-12"></div>
         <div class="col-md-10 col-12 pl-5">
@@ -50,16 +51,16 @@
                     <c:forEach items="${marks}" var="mark" varStatus="markLoopCount">
                         <tr>
                             <input type="hidden" value="${mark.idUser}" name="userId${markLoopCount.count}"/>
-                            <td>${mark.tempStudentName}</td>
-                            <td>${mark.tempStudentSurname}</td>
+                            <td>${mark.studentName}</td>
+                            <td>${mark.studentSurname}</td>
                             <td>
                                 <select class="form-control" id="total" name="total${markLoopCount.count}"
-                                        value="${mark.tempMark}">
-                                    <option <c:if test="${mark.tempMark eq 0}">selected</c:if>>-</option>
-                                    <option <c:if test="${mark.tempMark eq 2}">selected</c:if>>2</option>
-                                    <option <c:if test="${mark.tempMark eq 3}">selected</c:if>>3</option>
-                                    <option <c:if test="${mark.tempMark eq 4}">selected</c:if>>4</option>
-                                    <option <c:if test="${mark.tempMark eq 5}">selected</c:if>>5</option>
+                                        value="${mark.studentMark}">
+                                    <option <c:if test="${mark.studentMark eq 0}">selected</c:if>>-</option>
+                                    <option <c:if test="${mark.studentMark eq 2}">selected</c:if>>2</option>
+                                    <option <c:if test="${mark.studentMark eq 3}">selected</c:if>>3</option>
+                                    <option <c:if test="${mark.studentMark eq 4}">selected</c:if>>4</option>
+                                    <option <c:if test="${mark.studentMark eq 5}">selected</c:if>>5</option>
                                 </select>
                             </td>
                         </tr>
@@ -75,4 +76,5 @@
         </div>
         <div class="col-md-1 col-12"></div>
     </div>
+
 </my:designPattern>

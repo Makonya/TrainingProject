@@ -1,8 +1,6 @@
 package com.epam.training.dao;
 
 import com.epam.training.entity.CourseStudents;
-import com.epam.training.entity.CourseUser;
-import com.epam.training.entity.User;
 import com.epam.training.pool.ConnectionPool;
 import org.apache.log4j.Logger;
 

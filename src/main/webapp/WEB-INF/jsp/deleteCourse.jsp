@@ -15,7 +15,8 @@
     <fmt:message key="course.delete.error" var="deleteCourseError"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
+
     <div class="row py-5 align-items-center">
         <div class="col-md-1 col-12"></div>
         <div class="col-md-10 col-12 pl-5">
@@ -41,7 +42,8 @@
                     <tr>
                         <td><a href="/kz/course?courseID=${course.id}"
                                class="card-link">${course.courseName}</a></td>
-                        <td><a href="/kz/deleteCourse?courseID=${course.id}" class="btn btn-primary">${deleteButton}</a></td>
+                        <td><a href="/kz/deleteCourse?courseID=${course.id}" class="btn btn-primary">${deleteButton}</a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -51,4 +53,5 @@
         </div>
         <div class="col-md-1 col-12"></div>
     </div>
+
 </my:designPattern>

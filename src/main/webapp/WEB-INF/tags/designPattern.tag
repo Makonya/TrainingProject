@@ -1,7 +1,6 @@
 <%@ tag import="static com.epam.training.util.AppConstant.ATT_ROLE" %>
 <%@ tag pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@attribute name="role" required="true" rtexprvalue="true" type="java.lang.String" %>
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -45,7 +44,7 @@
                     <a class="dropdown-item" href="set-language?lang=en">English</a>
                 </div>
             </div>
-            </div>
+        </div>
         <div class="col-md-8 col-12">
             <h1 class="display-4 text-uppercase text-center">${MHeader}</h1>
         </div>
@@ -85,5 +84,4 @@
     </div>
 </div>
 </body>
-
 </html>

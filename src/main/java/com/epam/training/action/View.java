@@ -10,7 +10,7 @@ import org.apache.log4j.*;
 import static com.epam.training.util.AppConstant.*;
 
 public class View {
-    private static final Logger logger = Logger.getLogger(View.class);
+    private static final Logger LOGGER = Logger.getLogger(View.class);
     private final HttpServletRequest request;
     private final HttpServletResponse response;
 
@@ -28,7 +28,7 @@ public class View {
                 request.getRequestDispatcher(path).forward(request, response);
             }
         } catch (ServletException | IOException e) {
-            logger.error("Can't work redirect dispatcher", e);
+            LOGGER.error("Can't work redirect dispatcher", e);
         }
     }
 }

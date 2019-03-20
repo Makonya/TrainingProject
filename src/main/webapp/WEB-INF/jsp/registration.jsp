@@ -32,7 +32,8 @@
     <fmt:message key="registration.error.email" var="email_error_reg"/>
 </fmt:bundle>
 
-<my:designPattern role="guest">
+<my:designPattern>
+
     <div class="row py-5 align-items-center">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -98,4 +99,5 @@
         </div>
         <div class="col-md-4"></div>
     </div>
+
 </my:designPattern>

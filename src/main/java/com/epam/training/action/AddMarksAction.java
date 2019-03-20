@@ -1,9 +1,9 @@
 package com.epam.training.action;
 
 import com.epam.training.dao.CourseDao;
-import com.epam.training.dao.CourseUserDao;
+import com.epam.training.dao.CourseStudentsDao;
 import com.epam.training.dao.MarkDao;
-import com.epam.training.entity.CourseUser;
+import com.epam.training.entity.CourseStudents;
 import com.epam.training.entity.Mark;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +19,8 @@ public class AddMarksAction implements Action {
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
         int courseId = Integer.parseInt(request.getParameter(ATT_COURSE_ID));
 
-        CourseUserDao courseUserDao = new CourseUserDao();
-        List<CourseUser> courseUsers = courseUserDao.findByCourseId(courseId);
+        CourseStudentsDao courseStudentsDao = new CourseStudentsDao();
+        List<CourseStudents> courseUsers = courseStudentsDao.findByCourseId(courseId);
 
         CourseDao courseDao = new CourseDao();
         if (request.getMethod().equals(METHOD_POST)) {
@@ -36,7 +36,7 @@ public class AddMarksAction implements Action {
                     mark.setIdCourse(courseId);
                     mark.setTotal(total);
                     if (markDao.findByCourseUserId(mark)) {
-                        if (courseUsers.get(i - 1).getTempMark() != mark.getTotal()) {
+                        if (courseUsers.get(i - 1).getStudentMark() != mark.getTotal()) {
                             marksToUpdate.add(mark);
                         }
                     } else {
@@ -54,7 +54,7 @@ public class AddMarksAction implements Action {
                     if (markDao.update(marksToUpdate)) request.setAttribute(MARKS_UPDATE_SUCCESS, true);
                 }
             }
-            courseUsers = courseUserDao.findByCourseId(courseId);
+            courseUsers = courseStudentsDao.findByCourseId(courseId);
         }
         request.setAttribute(ATT_COURSE_NAME, courseDao.findById(courseId).getCourseName());
         request.setAttribute(ATT_MARKS, courseUsers);

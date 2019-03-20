@@ -11,7 +11,7 @@
     <fmt:message key="welcome.registration" var="MRegistration"/>
 </fmt:bundle>
 
-<my:designPattern role="guest">
+<my:designPattern>
 
     <div class="row py-5 align-items-center">
         <div class="col-md-12">

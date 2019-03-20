@@ -10,7 +10,7 @@
     <fmt:message key="courses.add.new" var="addNewCourse"/>
 </fmt:bundle>
 
-<my:designPattern role="">
+<my:designPattern>
 
     <div class="row py-5">
         <div class="col-md-3 col-12">

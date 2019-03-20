@@ -15,7 +15,7 @@
     <fmt:message key="login.error" var="login_error_aut"/>
 </fmt:bundle>
 
-<my:designPattern role="guest">
+<my:designPattern>
 
     <div class="row py-5 align-items-center">
         <div class="col-md-4"></div>
