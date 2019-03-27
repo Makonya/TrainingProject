@@ -102,7 +102,7 @@ ENGINE = InnoDB;
 -- Table `faculty`.`FEEDBACK`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `faculty`.`FEEDBACK` (
-  `ID_FEEDBACK` BIGINT(20) NOT NULL,
+  `ID_FEEDBACK` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `INFO` TEXT NOT NULL,
   `FEEDBACK_DATE` DATE NOT NULL,
   `ID_COURSE` BIGINT(20) NOT NULL,
@@ -195,6 +195,8 @@ insert into user(LOGIN, PASSWORD, NAME, SURNAME, EMAIL, ID_ROLE)
 			values('teacher', 'a426dcf72ba25d046591f81a5495eab7', 'Irina', 'Ivanova', 'ivanova_ir@gmail.com', 2);
 insert into user(LOGIN, PASSWORD, NAME, SURNAME, EMAIL, ID_ROLE)
 			values('student', 'ad6a280417a0f533d8b670c61667e1a0', 'Victoriya', 'Ivanova', 'ivanova_v@gmail.com', 3);
+insert into user(LOGIN, PASSWORD, NAME, SURNAME, EMAIL, ID_ROLE)
+			values('student2', 'ad6a280417a0f533d8b670c61667e1a0', 'Ivan', 'Popov', 'popov_i@gmail.com', 3);
 
 insert into locale(LOCALE_NAME) values('ru');
 insert into locale(LOCALE_NAME) values('en');
@@ -209,12 +211,21 @@ insert into category(ID_CATEGORY, ID_LOCALE, CATEGORY_NAME) values(4, 1, 'Гео
 insert into category(ID_CATEGORY, ID_LOCALE, CATEGORY_NAME) values(4, 2, 'Geography');
 
 insert into course(COURSE_NAME, DESCRIPTION, START_DATE, END_DATE, ID_USER, ID_CATEGORY)
-			values('Школьный курс математики', 'Курс формирует у школьников математическое и естественно-научное мышление.', '2019-01-01', '2019-05-25', 2, 1);
+			values('Школьный курс математики', 'Курс формирует у школьников математическое и естественно-научное мышление.', '2019-01-01', '2019-02-28', 2, 1);
+insert into course(COURSE_NAME, DESCRIPTION, START_DATE, END_DATE, ID_USER, ID_CATEGORY)
+			values('Алгебраические выражения', 'В данном курсе будет рассмотрено понятие алгебраических выражений. В их состав входят буквенные переменные, которые могут принимать разные числовые значения. Поэтому для правильного решения алгебраических выражений необходимо ориентироваться в действиях с числовыми.', '2019-01-01', '2019-05-25', 2, 1);
 insert into course(COURSE_NAME, DESCRIPTION, START_DATE, END_DATE, ID_USER, ID_CATEGORY)
 			values('Грамматика и активный словарь', 'Курс по изучению английского языка позволяет не только освоить основы языка, но и стать его активным пользователем, вплоть до мышления на английском.', '2018-09-01', '2018-12-31', 2, 2);
 insert into course(COURSE_NAME, DESCRIPTION, START_DATE, END_DATE, ID_USER, ID_CATEGORY)
 			values('В ногу со временем', 'В мире современных технологий каждый человек должен хорошо владеть компьютером.', '2019-02-01', '2019-04-01', 2, 3);
 insert into course(COURSE_NAME, DESCRIPTION, START_DATE, END_DATE, ID_USER, ID_CATEGORY)
-			values('Изучаем географию с интересом', 'Благодаря курсу вы узнаете множество интересного о разных странах, материках, океанах и всем, что связано с географией. Курс изложен в формате интерактивных уроков с презентациями и тестами для закрепления пройденного материала. ', '2019-01-15', '2019-02-16', 2, 4);
+			values('Изучаем географию с интересом', 'Благодаря курсу вы узнаете множество интересного о разных странах, материках, океанах и всем, что связано с географией. Курс изложен в формате интерактивных уроков с презентациями и тестами для закрепления пройденного материала. ', '2019-01-15', '2019-05-16', 2, 4);
+
+insert into course_user values(1, 3);
+insert into course_user values(1, 4);
 
 insert into course_user values(2, 3);
+insert into course_user values(2, 4);
+
+insert into feedback(INFO, FEEDBACK_DATE, ID_COURSE, ID_USER)
+  values('Курс очень информативный', '2019-03-04', 1, 4);
