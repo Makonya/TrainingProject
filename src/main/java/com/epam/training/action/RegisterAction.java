@@ -71,11 +71,11 @@ public class RegisterAction implements Action {
     }
 
     private void paramValidation(HttpServletRequest req) {
-        checkParamValid(LOGIN_VAL_ERROR, login, LOGIN_VALIDATION, req);
-        checkParamValid(PASSWORD_VAL_ERROR, password, PASSWORD_VALIDATION, req);
-        checkParamValid(NAME_VAL_ERROR, name, NAME_VALIDATION, req);
-        checkParamValid(SURNAME_VAL_ERROR, surname, SURNAME_VALIDATION, req);
-        checkParamValid(EMAIL_VAL_ERROR, email, EMAIL_VALIDATION, req);
+        if (!checkParamValid(LOGIN_VAL_ERROR, login, LOGIN_VALIDATION, req)) correctness = false;
+        if (!checkParamValid(PASSWORD_VAL_ERROR, password, PASSWORD_VALIDATION, req)) correctness = false;
+        if (!checkParamValid(NAME_VAL_ERROR, name, NAME_VALIDATION, req)) correctness = false;
+        if (!checkParamValid(SURNAME_VAL_ERROR, surname, SURNAME_VALIDATION, req)) correctness = false;
+        if (!checkParamValid(EMAIL_VAL_ERROR, email, EMAIL_VALIDATION, req)) correctness = false;
     }
 
     private User fillNewUserParameters() {
